@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "229333668561",
+    "project_id": "taask-mock",
+    "storage_bucket": "taask-mock.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:229333668561:android:bbd997bd43c4193c85abf0",
+        "android_client_info": {
+          "package_name": "com.pestro.task.mock"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQbujr8z_1x7UffnNHe202tndEfrKfdIk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

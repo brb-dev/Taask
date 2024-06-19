@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1054814973748",
+    "project_id": "taask-dev-11ac0",
+    "storage_bucket": "taask-dev-11ac0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1054814973748:android:db78042c2c03e3e6283f61",
+        "android_client_info": {
+          "package_name": "com.pestro.task.dev"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1aGCdlBTzDpZCB1jGEcMJ-NUnYrl5Du8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
