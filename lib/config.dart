@@ -12,6 +12,8 @@ enum Flavor { mock, dev, prod }
 class Config {
   Flavor appFlavor = Flavor.prod;
 
+  bool get isMockFlavor => appFlavor == Flavor.mock;
+
   FirebaseOptions get firebaseOptions {
     switch (appFlavor) {
       case Flavor.mock:
