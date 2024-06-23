@@ -22,6 +22,8 @@ abstract class AppColor {
   static Color lightGrey = HexColor.fromHex('#F3F1F1');
   static Color lighterGrey = HexColor.fromHex('#6F6F6F');
   static Color red = HexColor.fromHex('#C34D33');
+  static Color green = HexColor.fromHex('#33FF58');
+  static Color pink = HexColor.fromHex('#FF33FF');
 }
 
 extension HexColor on Color {

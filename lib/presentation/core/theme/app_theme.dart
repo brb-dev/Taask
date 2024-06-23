@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'app_color.dart';
 import 'base_styles.dart';
@@ -16,8 +17,11 @@ final appThemeData = {
     canvasColor: AppColor.white,
     colorScheme: _colorScheme(),
     textTheme: _textTheme(),
-    elevatedButtonTheme: _elevatedButtonTheme(),
     appBarTheme: _appBarTheme(),
+
+    //button theme
+    elevatedButtonTheme: _elevatedButtonTheme(),
+    outlinedButtonTheme: _outlinedButtonTheme(),
   ),
   AppTheme.dark: ThemeData.light().copyWith(),
 };
@@ -40,6 +44,24 @@ ColorScheme _colorScheme() {
     surface: AppColor.white,
     secondary: AppColor.dusk50,
     inversePrimary: AppColor.grey,
+  );
+}
+
+OutlinedButtonThemeData _outlinedButtonTheme() {
+  return OutlinedButtonThemeData(
+    style: OutlinedButton.styleFrom(
+      backgroundColor: AppColor.white,
+      side: BorderSide(color: AppColor.darkCyan50),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+      textStyle: GoogleFonts.kantumruyPro(
+        fontSize: 15,
+        color: AppColor.white,
+        fontWeight: FontWeight.w600,
+        letterSpacing: 0.25,
+      ),
+      elevation: 0,
+      minimumSize: const Size(120, 45),
+    ),
   );
 }
 

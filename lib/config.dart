@@ -11,6 +11,8 @@ enum Flavor { mock, dev, prod }
 
 class Config {
   Flavor appFlavor = Flavor.prod;
+  int pageSize = 24;
+  int autoSearchTimeout = 1500;
 
   bool get isMockFlavor => appFlavor == Flavor.mock;
 

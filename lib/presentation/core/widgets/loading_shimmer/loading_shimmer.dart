@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../theme/app_color.dart';
 import '../../utils/app_assets.dart';
 import '../custom_image_view.dart';
 

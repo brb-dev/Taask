@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import '../error/errors.dart';
 import '../error/failures.dart';
+import 'value_validators.dart';
 
 @immutable
 abstract class ValueObject<T> {
@@ -41,4 +42,39 @@ abstract class ValueObject<T> {
 
   @override
   String toString() => 'Value($value)';
+}
+
+class SearchKey extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory SearchKey(String input) {
+    return SearchKey._(right(input));
+  }
+
+  factory SearchKey.search(String searchText) {
+    return SearchKey._(
+      validateStringNotEmpty(searchText)
+          .flatMap((input) => validateMinStringLength(input, 2)),
+    );
+  }
+
+  factory SearchKey.searchFilter(String searchText) {
+    return SearchKey._(
+      (validateStringIsEmpty(searchText).fold(
+        (l) => validateMinStringLength(l.failedValue, 2),
+        (r) => Right(r),
+      )),
+    );
+  }
+
+  bool get validateNotEmpty => searchValueOrEmpty.isNotEmpty;
+
+  String get searchValueOrEmpty => value.getOrElse(() => '');
+
+  int get countWhenValid => validateNotEmpty ? 1 : 0;
+
+  bool get isValueEmpty => value.fold((l) => l.failedValue, (r) => r).isEmpty;
+
+  const SearchKey._(this.value);
 }

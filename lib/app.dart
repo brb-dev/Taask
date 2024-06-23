@@ -8,7 +8,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'application/auth/auth_bloc.dart';
 import 'application/auth/login/login_form_bloc.dart';
 import 'application/auth/register/register_form_bloc.dart';
+import 'application/task/task_bloc.dart';
+import 'application/task/task_filter/task_filter_bloc.dart';
 import 'config.dart';
+import 'domain/core/value/value_objects.dart';
+import 'domain/task/entities/task_filter_entity.dart';
 import 'locator.dart';
 import 'presentation/core/router/app_router.dart';
 import 'presentation/core/router/app_router_observer.dart';
@@ -60,6 +64,21 @@ class App extends StatelessWidget {
         ),
         BlocProvider<RegisterFormBloc>(
           create: (context) => locator<RegisterFormBloc>(),
+        ),
+        BlocProvider<TaskBloc>(
+          create: (context) => locator<TaskBloc>()
+            ..add(
+              TaskEvent.fetchTaskList(
+                searchKey: SearchKey(''),
+                filter: TaskFilterEntity.empty(),
+              ),
+            ),
+        ),
+        BlocProvider<TaskFilterBloc>(
+          create: (context) => locator<TaskFilterBloc>()
+            ..add(
+              const TaskFilterEvent.initialize(),
+            ),
         ),
       ],
       child: MaterialApp.router(

@@ -11,6 +11,7 @@ class _Logo extends StatelessWidget {
         imagePath: AppAssets.taskIcon,
         width: 50,
         height: 50,
+        color: AppColor.grey,
       ),
     );
   }
