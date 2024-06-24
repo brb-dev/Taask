@@ -39,8 +39,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
                       displayName: 'John Doe',
                       email: 'johndoe@yopmail.com',
                       profilePicUrl: '',
-                      uid: '',
-                      userName: '',
+                      uid: '1',
+                      userName: 'John',
                     ),
                   ),
                 )
@@ -49,10 +49,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
                       AuthState.authenticated(
                         user: TaskUser.empty().copyWith(
                           uid: user.uid,
-                          displayName: 'brb',
-                          email: '',
-                          profilePicUrl: '',
-                          userName: '',
+                          displayName: user.displayName ?? '',
+                          email: user.email!,
+                          profilePicUrl: user.photoURL ?? '',
+                          userName: user.displayName ?? '',
                         ),
                       ),
                     )

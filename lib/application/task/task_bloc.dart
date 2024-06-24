@@ -29,12 +29,6 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     await event.map(
       init: (e) async {
         emit(TaskState.initial());
-        add(
-          TaskEvent.fetchTaskList(
-            searchKey: SearchKey.search(''),
-            filter: TaskFilterEntity.empty(),
-          ),
-        );
       },
       fetchTaskList: (e) async {
         if ((e.searchKey == state.searchKey && e.searchKey.validateNotEmpty) ||
@@ -51,7 +45,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
         );
 
         final successOrFailure = await repository.fetchTaskItems(
-          user: TaskUser.empty(),
+          user: e.user,
           searchKey: e.searchKey,
           appliedFilter: e.filter,
           pageSize: config.pageSize,

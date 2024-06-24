@@ -58,6 +58,7 @@ class _ActualTaskSearchBar extends StatelessWidget {
     if (!onClear && searchKey.isEmpty) return;
     context.read<TaskBloc>().add(
           TaskEvent.fetchTaskList(
+            user: context.read<AuthBloc>().state.user!,
             filter: context.read<TaskBloc>().state.appliedFilter,
             searchKey: SearchKey.searchFilter(searchKey),
           ),

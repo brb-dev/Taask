@@ -22,6 +22,8 @@ TaskDto _$TaskDtoFromJson(Map<String, dynamic> json) {
 mixin _$TaskDto {
   @JsonKey(name: 'id', defaultValue: '')
   String get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'uid', defaultValue: '')
+  String get uid => throw _privateConstructorUsedError;
   @JsonKey(name: 'title', defaultValue: '')
   String get title => throw _privateConstructorUsedError;
   @JsonKey(name: 'description', defaultValue: '')
@@ -41,6 +43,7 @@ abstract class $TaskDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'id', defaultValue: '') String id,
+      @JsonKey(name: 'uid', defaultValue: '') String uid,
       @JsonKey(name: 'title', defaultValue: '') String title,
       @JsonKey(name: 'description', defaultValue: '') String description,
       @JsonKey(name: 'status', defaultValue: '') String status});
@@ -60,6 +63,7 @@ class _$TaskDtoCopyWithImpl<$Res, $Val extends TaskDto>
   @override
   $Res call({
     Object? id = null,
+    Object? uid = null,
     Object? title = null,
     Object? description = null,
     Object? status = null,
@@ -68,6 +72,10 @@ class _$TaskDtoCopyWithImpl<$Res, $Val extends TaskDto>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
               as String,
       title: null == title
           ? _value.title
@@ -94,6 +102,7 @@ abstract class _$$TaskDtoImplCopyWith<$Res> implements $TaskDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'id', defaultValue: '') String id,
+      @JsonKey(name: 'uid', defaultValue: '') String uid,
       @JsonKey(name: 'title', defaultValue: '') String title,
       @JsonKey(name: 'description', defaultValue: '') String description,
       @JsonKey(name: 'status', defaultValue: '') String status});
@@ -111,6 +120,7 @@ class __$$TaskDtoImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? uid = null,
     Object? title = null,
     Object? description = null,
     Object? status = null,
@@ -119,6 +129,10 @@ class __$$TaskDtoImplCopyWithImpl<$Res>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
               as String,
       title: null == title
           ? _value.title
@@ -141,6 +155,7 @@ class __$$TaskDtoImplCopyWithImpl<$Res>
 class _$TaskDtoImpl extends _TaskDto {
   const _$TaskDtoImpl(
       {@JsonKey(name: 'id', defaultValue: '') required this.id,
+      @JsonKey(name: 'uid', defaultValue: '') required this.uid,
       @JsonKey(name: 'title', defaultValue: '') required this.title,
       @JsonKey(name: 'description', defaultValue: '') required this.description,
       @JsonKey(name: 'status', defaultValue: '') required this.status})
@@ -153,6 +168,9 @@ class _$TaskDtoImpl extends _TaskDto {
   @JsonKey(name: 'id', defaultValue: '')
   final String id;
   @override
+  @JsonKey(name: 'uid', defaultValue: '')
+  final String uid;
+  @override
   @JsonKey(name: 'title', defaultValue: '')
   final String title;
   @override
@@ -164,7 +182,7 @@ class _$TaskDtoImpl extends _TaskDto {
 
   @override
   String toString() {
-    return 'TaskDto(id: $id, title: $title, description: $description, status: $status)';
+    return 'TaskDto(id: $id, uid: $uid, title: $title, description: $description, status: $status)';
   }
 
   @override
@@ -173,6 +191,7 @@ class _$TaskDtoImpl extends _TaskDto {
         (other.runtimeType == runtimeType &&
             other is _$TaskDtoImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
                 other.description == description) &&
@@ -181,7 +200,8 @@ class _$TaskDtoImpl extends _TaskDto {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, description, status);
+  int get hashCode =>
+      Object.hash(runtimeType, id, uid, title, description, status);
 
   @JsonKey(ignore: true)
   @override
@@ -200,6 +220,7 @@ class _$TaskDtoImpl extends _TaskDto {
 abstract class _TaskDto extends TaskDto {
   const factory _TaskDto(
       {@JsonKey(name: 'id', defaultValue: '') required final String id,
+      @JsonKey(name: 'uid', defaultValue: '') required final String uid,
       @JsonKey(name: 'title', defaultValue: '') required final String title,
       @JsonKey(name: 'description', defaultValue: '')
       required final String description,
@@ -212,6 +233,9 @@ abstract class _TaskDto extends TaskDto {
   @override
   @JsonKey(name: 'id', defaultValue: '')
   String get id;
+  @override
+  @JsonKey(name: 'uid', defaultValue: '')
+  String get uid;
   @override
   @JsonKey(name: 'title', defaultValue: '')
   String get title;

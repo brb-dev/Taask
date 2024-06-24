@@ -7,4 +7,5 @@ abstract class AppAssets {
   static const String taskIcon = '${_baseSvgPath}task_icon.svg';
   static const String logoutIcon = '${_baseSvgPath}logout_icon.svg';
   static const String smallSearchIcon = '${_baseSvgPath}small_search_icon.svg';
+  static const String defaultPhoto = '${_baseSvgPath}default_photo.svg';
 }

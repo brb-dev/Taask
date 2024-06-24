@@ -19,3 +19,25 @@ class TaskStatus extends ValueObject<String> {
 
   const TaskStatus._(this.value);
 }
+
+class TaskTitle extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory TaskTitle(String input) {
+    return TaskTitle._(validateStringNotEmpty(input));
+  }
+
+  const TaskTitle._(this.value);
+}
+
+class TaskDescription extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory TaskDescription(String input) {
+    return TaskDescription._(validateStringNotEmpty(input));
+  }
+
+  const TaskDescription._(this.value);
+}

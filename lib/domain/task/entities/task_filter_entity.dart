@@ -15,4 +15,10 @@ class TaskFilterEntity with _$TaskFilterEntity {
   factory TaskFilterEntity.empty() => const TaskFilterEntity(
         statusList: <TaskStatus>[],
       );
+
+  List<String> get statusListInString => statusList
+      .map(
+        (e) => e.getOrDefaultValue(''),
+      )
+      .toList();
 }

@@ -17,8 +17,9 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$TaskEntity {
   String get id => throw _privateConstructorUsedError;
-  String get title => throw _privateConstructorUsedError;
-  String get description => throw _privateConstructorUsedError;
+  String get uid => throw _privateConstructorUsedError;
+  TaskTitle get title => throw _privateConstructorUsedError;
+  TaskDescription get description => throw _privateConstructorUsedError;
   TaskStatus get status => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -32,7 +33,12 @@ abstract class $TaskEntityCopyWith<$Res> {
           TaskEntity value, $Res Function(TaskEntity) then) =
       _$TaskEntityCopyWithImpl<$Res, TaskEntity>;
   @useResult
-  $Res call({String id, String title, String description, TaskStatus status});
+  $Res call(
+      {String id,
+      String uid,
+      TaskTitle title,
+      TaskDescription description,
+      TaskStatus status});
 }
 
 /// @nodoc
@@ -49,6 +55,7 @@ class _$TaskEntityCopyWithImpl<$Res, $Val extends TaskEntity>
   @override
   $Res call({
     Object? id = null,
+    Object? uid = null,
     Object? title = null,
     Object? description = null,
     Object? status = null,
@@ -58,14 +65,18 @@ class _$TaskEntityCopyWithImpl<$Res, $Val extends TaskEntity>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String,
+              as TaskTitle,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String,
+              as TaskDescription,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -82,7 +93,12 @@ abstract class _$$TaskEntityImplCopyWith<$Res>
       __$$TaskEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String title, String description, TaskStatus status});
+  $Res call(
+      {String id,
+      String uid,
+      TaskTitle title,
+      TaskDescription description,
+      TaskStatus status});
 }
 
 /// @nodoc
@@ -97,6 +113,7 @@ class __$$TaskEntityImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? uid = null,
     Object? title = null,
     Object? description = null,
     Object? status = null,
@@ -106,14 +123,18 @@ class __$$TaskEntityImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String,
+              as TaskTitle,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String,
+              as TaskDescription,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -127,6 +148,7 @@ class __$$TaskEntityImplCopyWithImpl<$Res>
 class _$TaskEntityImpl extends _TaskEntity {
   const _$TaskEntityImpl(
       {required this.id,
+      required this.uid,
       required this.title,
       required this.description,
       required this.status})
@@ -135,15 +157,17 @@ class _$TaskEntityImpl extends _TaskEntity {
   @override
   final String id;
   @override
-  final String title;
+  final String uid;
   @override
-  final String description;
+  final TaskTitle title;
+  @override
+  final TaskDescription description;
   @override
   final TaskStatus status;
 
   @override
   String toString() {
-    return 'TaskEntity(id: $id, title: $title, description: $description, status: $status)';
+    return 'TaskEntity(id: $id, uid: $uid, title: $title, description: $description, status: $status)';
   }
 
   @override
@@ -152,6 +176,7 @@ class _$TaskEntityImpl extends _TaskEntity {
         (other.runtimeType == runtimeType &&
             other is _$TaskEntityImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
                 other.description == description) &&
@@ -159,7 +184,8 @@ class _$TaskEntityImpl extends _TaskEntity {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, description, status);
+  int get hashCode =>
+      Object.hash(runtimeType, id, uid, title, description, status);
 
   @JsonKey(ignore: true)
   @override
@@ -171,17 +197,20 @@ class _$TaskEntityImpl extends _TaskEntity {
 abstract class _TaskEntity extends TaskEntity {
   const factory _TaskEntity(
       {required final String id,
-      required final String title,
-      required final String description,
+      required final String uid,
+      required final TaskTitle title,
+      required final TaskDescription description,
       required final TaskStatus status}) = _$TaskEntityImpl;
   const _TaskEntity._() : super._();
 
   @override
   String get id;
   @override
-  String get title;
+  String get uid;
   @override
-  String get description;
+  TaskTitle get title;
+  @override
+  TaskDescription get description;
   @override
   TaskStatus get status;
   @override

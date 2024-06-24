@@ -10,15 +10,23 @@ class TaskEntity with _$TaskEntity {
 
   const factory TaskEntity({
     required String id,
-    required String title,
-    required String description,
+    required String uid,
+    required TaskTitle title,
+    required TaskDescription description,
     required TaskStatus status,
   }) = _TaskEntity;
 
   factory TaskEntity.empty() => TaskEntity(
         id: '',
-        title: '',
-        description: '',
+        uid: '',
+        title: TaskTitle(''),
+        description: TaskDescription(''),
         status: TaskStatus(''),
       );
+
+  bool get isValid =>
+      uid.isNotEmpty &&
+      title.isValid() &&
+      description.isValid() &&
+      status.isValid();
 }

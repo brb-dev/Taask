@@ -14,4 +14,11 @@ abstract class ITaskRepository {
     required int pageSize,
     required int offSet,
   });
+
+  Future<Either<ApiFailure, Unit>> addOrEditTask({
+    required TaskEntity task,
+  });
+  Future<Either<ApiFailure, Unit>> deleteTask({
+    required TaskEntity task,
+  });
 }

@@ -80,6 +80,7 @@ class _TaskFilter extends StatelessWidget {
     if (context.read<TaskBloc>().state.appliedFilter != filter) {
       context.read<TaskBloc>().add(
             TaskEvent.fetchTaskList(
+              user: context.read<AuthBloc>().state.user!,
               searchKey: context.read<TaskBloc>().state.searchKey,
               filter: filter,
             ),

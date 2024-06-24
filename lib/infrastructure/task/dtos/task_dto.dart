@@ -12,6 +12,7 @@ class TaskDto with _$TaskDto {
 
   const factory TaskDto({
     @JsonKey(name: 'id', defaultValue: '') required String id,
+    @JsonKey(name: 'uid', defaultValue: '') required String uid,
     @JsonKey(name: 'title', defaultValue: '') required String title,
     @JsonKey(name: 'description', defaultValue: '') required String description,
     @JsonKey(name: 'status', defaultValue: '') required String status,
@@ -20,8 +21,9 @@ class TaskDto with _$TaskDto {
   TaskEntity toDomain() {
     return TaskEntity(
       id: id,
-      title: title,
-      description: description,
+      uid: uid,
+      title: TaskTitle(title),
+      description: TaskDescription(description),
       status: TaskStatus(status),
     );
   }
@@ -31,14 +33,17 @@ class TaskDto with _$TaskDto {
   ) {
     return TaskDto(
       id: task.id,
-      title: task.title,
-      description: task.description,
+      uid: task.uid,
+      title: task.title.getOrDefaultValue(''),
+      description: task.description.getOrDefaultValue(''),
       status: task.status.getOrCrash(),
     );
   }
 
-  factory TaskDto.fromFirebaseDocument(Map<String, dynamic>? data) {
-    return data != null ? TaskDto.fromJson(data) : const TaskDto._();
+  factory TaskDto.fromFirebaseDocument(String id, Map<String, dynamic>? data) {
+    return data != null
+        ? TaskDto.fromJson(data).copyWith(id: id)
+        : const TaskDto._();
   }
 
   factory TaskDto.fromJson(Map<String, dynamic> json) =>

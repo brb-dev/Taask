@@ -33,6 +33,8 @@ class TaskRepository implements ITaskRepository {
     if (config.appFlavor == Flavor.mock) {
       try {
         final taskList = await localDataSource.fetchTaskList(
+          searchKey: searchKey.getOrDefaultValue(''),
+          appliedFilter: appliedFilter,
           pageSize: pageSize,
           offSet: offSet,
         );
@@ -44,10 +46,59 @@ class TaskRepository implements ITaskRepository {
     }
     try {
       final taskList = await remoteDataSource.fetchTaskList(
+        user: user,
         searchKey: searchKey.getOrDefaultValue(''),
         appliedFilter: appliedFilter,
         pageSize: pageSize,
         offSet: offSet,
+      );
+
+      return Right(taskList);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, Unit>> addOrEditTask(
+      {required TaskEntity task}) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final taskList = await localDataSource.addOrEditTask(
+          task: task,
+        );
+
+        return Right(taskList);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
+    try {
+      final taskList = await remoteDataSource.addOrEditTask(
+        task: task,
+      );
+
+      return Right(taskList);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, Unit>> deleteTask(
+      {required TaskEntity task}) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final taskList = await localDataSource.deleteTask(task: task);
+
+        return Right(taskList);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
+    try {
+      final taskList = await remoteDataSource.deleteTask(
+        task: task,
       );
 
       return Right(taskList);

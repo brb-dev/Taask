@@ -4,6 +4,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:task/application/profile/profile_bloc.dart';
+import 'package:task/application/task/manage_task/manage_task_bloc.dart';
+import 'package:task/domain/auth/entities/task_user.dart';
 
 import 'application/auth/auth_bloc.dart';
 import 'application/auth/login/login_form_bloc.dart';
@@ -69,6 +72,9 @@ class App extends StatelessWidget {
           create: (context) => locator<TaskBloc>()
             ..add(
               TaskEvent.fetchTaskList(
+                user: context.read<AuthBloc>().state.user == null
+                    ? TaskUser.empty()
+                    : context.read<AuthBloc>().state.user!,
                 searchKey: SearchKey(''),
                 filter: TaskFilterEntity.empty(),
               ),
@@ -78,6 +84,16 @@ class App extends StatelessWidget {
           create: (context) => locator<TaskFilterBloc>()
             ..add(
               const TaskFilterEvent.initialize(),
+            ),
+        ),
+        BlocProvider<ManageTaskBloc>(
+          create: (context) =>
+              locator<ManageTaskBloc>()..add(const ManageTaskEvent.init()),
+        ),
+        BlocProvider<ProfileBloc>(
+          create: (context) => locator<ProfileBloc>()
+            ..add(
+              const ProfileEvent.initialize(),
             ),
         ),
       ],

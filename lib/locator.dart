@@ -1,4 +1,6 @@
 import 'package:get_it/get_it.dart';
+import 'package:task/application/profile/profile_bloc.dart';
+import 'package:task/application/task/manage_task/manage_task_bloc.dart';
 
 import 'application/auth/auth_bloc.dart';
 import 'application/auth/login/login_form_bloc.dart';
@@ -76,5 +78,14 @@ void setupLocator() {
   );
   locator.registerLazySingleton(
     () => TaskFilterBloc(),
+  );
+
+  locator.registerLazySingleton(
+    () => ProfileBloc(),
+  );
+  locator.registerLazySingleton(
+    () => ManageTaskBloc(
+      repository: locator<TaskRepository>(),
+    ),
   );
 }

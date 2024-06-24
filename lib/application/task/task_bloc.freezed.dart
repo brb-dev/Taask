@@ -19,7 +19,8 @@ mixin _$TaskEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(TaskFilterEntity filter, SearchKey searchKey)
+    required TResult Function(
+            TaskUser user, TaskFilterEntity filter, SearchKey searchKey)
         fetchTaskList,
     required TResult Function() loadMoreTaskItem,
   }) =>
@@ -27,7 +28,8 @@ mixin _$TaskEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function(TaskFilterEntity filter, SearchKey searchKey)?
+    TResult? Function(
+            TaskUser user, TaskFilterEntity filter, SearchKey searchKey)?
         fetchTaskList,
     TResult? Function()? loadMoreTaskItem,
   }) =>
@@ -35,7 +37,8 @@ mixin _$TaskEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(TaskFilterEntity filter, SearchKey searchKey)?
+    TResult Function(
+            TaskUser user, TaskFilterEntity filter, SearchKey searchKey)?
         fetchTaskList,
     TResult Function()? loadMoreTaskItem,
     required TResult orElse(),
@@ -120,7 +123,8 @@ class _$InitImpl implements _Init {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(TaskFilterEntity filter, SearchKey searchKey)
+    required TResult Function(
+            TaskUser user, TaskFilterEntity filter, SearchKey searchKey)
         fetchTaskList,
     required TResult Function() loadMoreTaskItem,
   }) {
@@ -131,7 +135,8 @@ class _$InitImpl implements _Init {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function(TaskFilterEntity filter, SearchKey searchKey)?
+    TResult? Function(
+            TaskUser user, TaskFilterEntity filter, SearchKey searchKey)?
         fetchTaskList,
     TResult? Function()? loadMoreTaskItem,
   }) {
@@ -142,7 +147,8 @@ class _$InitImpl implements _Init {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(TaskFilterEntity filter, SearchKey searchKey)?
+    TResult Function(
+            TaskUser user, TaskFilterEntity filter, SearchKey searchKey)?
         fetchTaskList,
     TResult Function()? loadMoreTaskItem,
     required TResult orElse(),
@@ -198,8 +204,9 @@ abstract class _$$FetchTaskListImplCopyWith<$Res> {
           _$FetchTaskListImpl value, $Res Function(_$FetchTaskListImpl) then) =
       __$$FetchTaskListImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({TaskFilterEntity filter, SearchKey searchKey});
+  $Res call({TaskUser user, TaskFilterEntity filter, SearchKey searchKey});
 
+  $TaskUserCopyWith<$Res> get user;
   $TaskFilterEntityCopyWith<$Res> get filter;
 }
 
@@ -214,10 +221,15 @@ class __$$FetchTaskListImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? user = null,
     Object? filter = null,
     Object? searchKey = null,
   }) {
     return _then(_$FetchTaskListImpl(
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as TaskUser,
       filter: null == filter
           ? _value.filter
           : filter // ignore: cast_nullable_to_non_nullable
@@ -227,6 +239,14 @@ class __$$FetchTaskListImplCopyWithImpl<$Res>
           : searchKey // ignore: cast_nullable_to_non_nullable
               as SearchKey,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TaskUserCopyWith<$Res> get user {
+    return $TaskUserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
   }
 
   @override
@@ -241,8 +261,11 @@ class __$$FetchTaskListImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$FetchTaskListImpl implements _FetchTaskList {
-  const _$FetchTaskListImpl({required this.filter, required this.searchKey});
+  const _$FetchTaskListImpl(
+      {required this.user, required this.filter, required this.searchKey});
 
+  @override
+  final TaskUser user;
   @override
   final TaskFilterEntity filter;
   @override
@@ -250,7 +273,7 @@ class _$FetchTaskListImpl implements _FetchTaskList {
 
   @override
   String toString() {
-    return 'TaskEvent.fetchTaskList(filter: $filter, searchKey: $searchKey)';
+    return 'TaskEvent.fetchTaskList(user: $user, filter: $filter, searchKey: $searchKey)';
   }
 
   @override
@@ -258,13 +281,14 @@ class _$FetchTaskListImpl implements _FetchTaskList {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FetchTaskListImpl &&
+            (identical(other.user, user) || other.user == user) &&
             (identical(other.filter, filter) || other.filter == filter) &&
             (identical(other.searchKey, searchKey) ||
                 other.searchKey == searchKey));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, filter, searchKey);
+  int get hashCode => Object.hash(runtimeType, user, filter, searchKey);
 
   @JsonKey(ignore: true)
   @override
@@ -276,35 +300,38 @@ class _$FetchTaskListImpl implements _FetchTaskList {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(TaskFilterEntity filter, SearchKey searchKey)
+    required TResult Function(
+            TaskUser user, TaskFilterEntity filter, SearchKey searchKey)
         fetchTaskList,
     required TResult Function() loadMoreTaskItem,
   }) {
-    return fetchTaskList(filter, searchKey);
+    return fetchTaskList(user, filter, searchKey);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function(TaskFilterEntity filter, SearchKey searchKey)?
+    TResult? Function(
+            TaskUser user, TaskFilterEntity filter, SearchKey searchKey)?
         fetchTaskList,
     TResult? Function()? loadMoreTaskItem,
   }) {
-    return fetchTaskList?.call(filter, searchKey);
+    return fetchTaskList?.call(user, filter, searchKey);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(TaskFilterEntity filter, SearchKey searchKey)?
+    TResult Function(
+            TaskUser user, TaskFilterEntity filter, SearchKey searchKey)?
         fetchTaskList,
     TResult Function()? loadMoreTaskItem,
     required TResult orElse(),
   }) {
     if (fetchTaskList != null) {
-      return fetchTaskList(filter, searchKey);
+      return fetchTaskList(user, filter, searchKey);
     }
     return orElse();
   }
@@ -346,9 +373,11 @@ class _$FetchTaskListImpl implements _FetchTaskList {
 
 abstract class _FetchTaskList implements TaskEvent {
   const factory _FetchTaskList(
-      {required final TaskFilterEntity filter,
+      {required final TaskUser user,
+      required final TaskFilterEntity filter,
       required final SearchKey searchKey}) = _$FetchTaskListImpl;
 
+  TaskUser get user;
   TaskFilterEntity get filter;
   SearchKey get searchKey;
   @JsonKey(ignore: true)
@@ -395,7 +424,8 @@ class _$LoadMoreTaskItemImpl implements _LoadMoreTaskItem {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(TaskFilterEntity filter, SearchKey searchKey)
+    required TResult Function(
+            TaskUser user, TaskFilterEntity filter, SearchKey searchKey)
         fetchTaskList,
     required TResult Function() loadMoreTaskItem,
   }) {
@@ -406,7 +436,8 @@ class _$LoadMoreTaskItemImpl implements _LoadMoreTaskItem {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function(TaskFilterEntity filter, SearchKey searchKey)?
+    TResult? Function(
+            TaskUser user, TaskFilterEntity filter, SearchKey searchKey)?
         fetchTaskList,
     TResult? Function()? loadMoreTaskItem,
   }) {
@@ -417,7 +448,8 @@ class _$LoadMoreTaskItemImpl implements _LoadMoreTaskItem {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(TaskFilterEntity filter, SearchKey searchKey)?
+    TResult Function(
+            TaskUser user, TaskFilterEntity filter, SearchKey searchKey)?
         fetchTaskList,
     TResult Function()? loadMoreTaskItem,
     required TResult orElse(),

@@ -9,10 +9,12 @@ class CustomTile extends StatelessWidget {
     required this.title,
     required this.description,
     required this.status,
+    required this.onTap,
   });
   final String title;
   final String description;
   final TaskStatus status;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +32,9 @@ class CustomTile extends StatelessWidget {
               ?.copyWith(color: status.displayStatusLabelColor),
         ),
       ),
+      onTap: () {
+        onTap();
+      },
     );
   }
 }

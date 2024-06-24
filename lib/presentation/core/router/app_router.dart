@@ -35,6 +35,16 @@ class AppRouter extends $AppRouter {
             ),
           ],
         ),
+        CustomRoute(
+          page: AddTaskRoute.page,
+          path: RouteNames.addTask,
+          transitionsBuilder: TransitionsBuilders.slideLeft,
+        ),
+        CustomRoute(
+          page: EditTaskRoute.page,
+          path: RouteNames.editTask,
+          transitionsBuilder: TransitionsBuilders.slideLeft,
+        ),
         RedirectRoute(
           path: '*',
           redirectTo: RouteNames.empty,
