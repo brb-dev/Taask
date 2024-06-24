@@ -42,6 +42,11 @@ class EditTaskScreen extends StatelessWidget {
             () {
               if (!state.isSubmitting && state.isSuccess) {
                 final taskState = context.read<TaskBloc>().state;
+                context.read<ManageTaskBloc>().add(
+                      ManageTaskEvent.setTaskData(
+                        data: TaskEntity.empty(),
+                      ),
+                    );
                 context.read<TaskBloc>().add(
                       TaskEvent.fetchTaskList(
                         user: context.read<AuthBloc>().state.user ??
@@ -81,7 +86,13 @@ class EditTaskScreen extends StatelessWidget {
                   GenericDropdown(
                     key: const Key('taskStatusKey'),
                     labelText: '',
-                    validator: (_) {},
+                    validator: (text) => TaskTitle(text ?? '').value.fold(
+                          (f) => f.maybeMap(
+                            empty: (_) => 'Task status cannot be empty.',
+                            orElse: () => null,
+                          ),
+                          (_) => null,
+                        ),
                     onChanged: (val) => context.read<ManageTaskBloc>().add(
                           ManageTaskEvent.onValueChange(
                             label: TaskLebel.status,

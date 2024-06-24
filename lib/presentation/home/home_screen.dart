@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task/application/auth/auth_bloc.dart';
 import 'package:task/application/task/manage_task/manage_task_bloc.dart';
 import 'package:task/presentation/core/router/app_router.gr.dart';
+import 'package:task/presentation/core/router/route_name.dart';
 
 import '../../application/task/task_bloc.dart';
 import '../../application/task/task_filter/task_filter_bloc.dart';
@@ -136,7 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: ScaleButton(
         icon: Icons.add,
         label: 'New task',
-        onPress: () {},
+        onPress: () => context.router.pushNamed(RouteNames.addTask),
         scrollController: _controller,
       ),
     );
