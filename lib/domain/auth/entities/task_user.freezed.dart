@@ -18,8 +18,11 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$TaskUser {
   String get uid => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
+  String get fullName => throw _privateConstructorUsedError;
+  String get gender => throw _privateConstructorUsedError;
+  String get dob => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError;
+  EmailAddress get email => throw _privateConstructorUsedError;
   String get displayName => throw _privateConstructorUsedError;
   String get profilePicUrl => throw _privateConstructorUsedError;
 
@@ -36,8 +39,11 @@ abstract class $TaskUserCopyWith<$Res> {
   $Res call(
       {String uid,
       String userName,
+      String fullName,
+      String gender,
+      String dob,
       String password,
-      String email,
+      EmailAddress email,
       String displayName,
       String profilePicUrl});
 }
@@ -57,6 +63,9 @@ class _$TaskUserCopyWithImpl<$Res, $Val extends TaskUser>
   $Res call({
     Object? uid = null,
     Object? userName = null,
+    Object? fullName = null,
+    Object? gender = null,
+    Object? dob = null,
     Object? password = null,
     Object? email = null,
     Object? displayName = null,
@@ -71,6 +80,18 @@ class _$TaskUserCopyWithImpl<$Res, $Val extends TaskUser>
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
               as String,
+      fullName: null == fullName
+          ? _value.fullName
+          : fullName // ignore: cast_nullable_to_non_nullable
+              as String,
+      gender: null == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String,
+      dob: null == dob
+          ? _value.dob
+          : dob // ignore: cast_nullable_to_non_nullable
+              as String,
       password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
@@ -78,7 +99,7 @@ class _$TaskUserCopyWithImpl<$Res, $Val extends TaskUser>
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
+              as EmailAddress,
       displayName: null == displayName
           ? _value.displayName
           : displayName // ignore: cast_nullable_to_non_nullable
@@ -102,8 +123,11 @@ abstract class _$$TaskUserImplCopyWith<$Res>
   $Res call(
       {String uid,
       String userName,
+      String fullName,
+      String gender,
+      String dob,
       String password,
-      String email,
+      EmailAddress email,
       String displayName,
       String profilePicUrl});
 }
@@ -121,6 +145,9 @@ class __$$TaskUserImplCopyWithImpl<$Res>
   $Res call({
     Object? uid = null,
     Object? userName = null,
+    Object? fullName = null,
+    Object? gender = null,
+    Object? dob = null,
     Object? password = null,
     Object? email = null,
     Object? displayName = null,
@@ -135,6 +162,18 @@ class __$$TaskUserImplCopyWithImpl<$Res>
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
               as String,
+      fullName: null == fullName
+          ? _value.fullName
+          : fullName // ignore: cast_nullable_to_non_nullable
+              as String,
+      gender: null == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String,
+      dob: null == dob
+          ? _value.dob
+          : dob // ignore: cast_nullable_to_non_nullable
+              as String,
       password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
@@ -142,7 +181,7 @@ class __$$TaskUserImplCopyWithImpl<$Res>
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
+              as EmailAddress,
       displayName: null == displayName
           ? _value.displayName
           : displayName // ignore: cast_nullable_to_non_nullable
@@ -161,6 +200,9 @@ class _$TaskUserImpl extends _TaskUser {
   const _$TaskUserImpl(
       {required this.uid,
       required this.userName,
+      required this.fullName,
+      required this.gender,
+      required this.dob,
       required this.password,
       required this.email,
       required this.displayName,
@@ -172,9 +214,15 @@ class _$TaskUserImpl extends _TaskUser {
   @override
   final String userName;
   @override
+  final String fullName;
+  @override
+  final String gender;
+  @override
+  final String dob;
+  @override
   final String password;
   @override
-  final String email;
+  final EmailAddress email;
   @override
   final String displayName;
   @override
@@ -182,7 +230,7 @@ class _$TaskUserImpl extends _TaskUser {
 
   @override
   String toString() {
-    return 'TaskUser(uid: $uid, userName: $userName, password: $password, email: $email, displayName: $displayName, profilePicUrl: $profilePicUrl)';
+    return 'TaskUser(uid: $uid, userName: $userName, fullName: $fullName, gender: $gender, dob: $dob, password: $password, email: $email, displayName: $displayName, profilePicUrl: $profilePicUrl)';
   }
 
   @override
@@ -193,6 +241,10 @@ class _$TaskUserImpl extends _TaskUser {
             (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.userName, userName) ||
                 other.userName == userName) &&
+            (identical(other.fullName, fullName) ||
+                other.fullName == fullName) &&
+            (identical(other.gender, gender) || other.gender == gender) &&
+            (identical(other.dob, dob) || other.dob == dob) &&
             (identical(other.password, password) ||
                 other.password == password) &&
             (identical(other.email, email) || other.email == email) &&
@@ -203,8 +255,8 @@ class _$TaskUserImpl extends _TaskUser {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, uid, userName, password, email, displayName, profilePicUrl);
+  int get hashCode => Object.hash(runtimeType, uid, userName, fullName, gender,
+      dob, password, email, displayName, profilePicUrl);
 
   @JsonKey(ignore: true)
   @override
@@ -217,8 +269,11 @@ abstract class _TaskUser extends TaskUser {
   const factory _TaskUser(
       {required final String uid,
       required final String userName,
+      required final String fullName,
+      required final String gender,
+      required final String dob,
       required final String password,
-      required final String email,
+      required final EmailAddress email,
       required final String displayName,
       required final String profilePicUrl}) = _$TaskUserImpl;
   const _TaskUser._() : super._();
@@ -228,9 +283,15 @@ abstract class _TaskUser extends TaskUser {
   @override
   String get userName;
   @override
+  String get fullName;
+  @override
+  String get gender;
+  @override
+  String get dob;
+  @override
   String get password;
   @override
-  String get email;
+  EmailAddress get email;
   @override
   String get displayName;
   @override

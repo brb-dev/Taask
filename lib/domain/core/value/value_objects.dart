@@ -78,3 +78,14 @@ class SearchKey extends ValueObject<String> {
 
   const SearchKey._(this.value);
 }
+
+class UID extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory UID(String input) {
+    return UID._(right(input));
+  }
+
+  const UID._(this.value);
+}

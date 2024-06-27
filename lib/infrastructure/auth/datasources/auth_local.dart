@@ -32,4 +32,13 @@ class AuthLocalDataSource {
 
     yield TaskUserDto.fromJson(data).toDomain();
   }
+
+  Future<TaskUser> fetchUser() async {
+    await Future.delayed(const Duration(seconds: 3));
+    final data = json.decode(
+      await rootBundle.loadString('assets/response/user_response.json'),
+    );
+
+    return TaskUserDto.fromJson(data).toDomain();
+  }
 }

@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../config.dart';
-import '../../domain/auth/entities/task_user.dart';
 import '../../domain/auth/repositories/i_auth_repository.dart';
 
 part 'auth_bloc.freezed.dart';
@@ -33,30 +32,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         await result.fold(
           (invalid) async => emit(const AuthState.unauthenticated()),
           (userStream) async => config.isMockFlavor
-              ? emit(
-                  AuthState.authenticated(
-                    user: TaskUser.empty().copyWith(
-                      displayName: 'John Doe',
-                      email: 'johndoe@yopmail.com',
-                      profilePicUrl: '',
-                      uid: '1',
-                      userName: 'John',
-                    ),
-                  ),
-                )
-              : userStream.listen((user) => user != null
-                  ? emit(
-                      AuthState.authenticated(
-                        user: TaskUser.empty().copyWith(
-                          uid: user.uid,
-                          displayName: user.displayName ?? '',
-                          email: user.email!,
-                          profilePicUrl: user.photoURL ?? '',
-                          userName: user.displayName ?? '',
-                        ),
-                      ),
-                    )
-                  : emit(const AuthState.unauthenticated())),
+              ? emit(const AuthState.authenticated())
+              : userStream.listen(
+                  (user) async => user != null
+                      ? emit(const AuthState.authenticated())
+                      : emit(const AuthState.unauthenticated()),
+                ),
         );
       },
       logout: (e) async {

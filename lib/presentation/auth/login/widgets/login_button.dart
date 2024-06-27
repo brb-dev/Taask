@@ -10,7 +10,7 @@ class _LoginButton extends StatelessWidget {
           previous.isSubmitting != current.isSubmitting,
       builder: (context, state) {
         return ElevatedButton(
-          key: const Key('loginButtonKey'),
+          key: WidgetKeys.loginButtonKey,
           onPressed: state.isSubmitting
               ? null
               : () {

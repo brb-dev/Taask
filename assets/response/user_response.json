@@ -1,0 +1,12 @@
+{
+  "user":{
+      "uid":"1",
+      "name": "John Doe",
+      "email": "johndoe@yopmail.com",
+      "gender": "male",
+      "dob": "25/09/1989",
+      "profilePicUrl": "https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg",
+      "userName": "johny",
+      "displayName": "johny"
+  }
+}

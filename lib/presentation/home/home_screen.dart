@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task/application/auth/auth_bloc.dart';
+import 'package:task/application/auth/user/user_bloc.dart';
 import 'package:task/application/task/manage_task/manage_task_bloc.dart';
 import 'package:task/presentation/core/router/app_router.gr.dart';
 import 'package:task/presentation/core/router/route_name.dart';
@@ -125,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 .add(const TaskEvent.loadMoreTaskItem()),
             onRefresh: () => context.read<TaskBloc>().add(
                   TaskEvent.fetchTaskList(
-                    user: context.read<AuthBloc>().state.user!,
+                    user: context.read<UserBloc>().state.user,
                     searchKey: context.read<TaskBloc>().state.searchKey,
                     filter: context.read<TaskBloc>().state.appliedFilter,
                   ),

@@ -1,12 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:task/application/profile/profile_bloc.dart';
-import 'package:task/presentation/core/widgets/balanced_text_row.dart';
 
 import '../../application/auth/auth_bloc.dart';
+import '../../application/auth/user/user_bloc.dart';
 import '../core/theme/app_color.dart';
 import '../core/utils/app_assets.dart';
+import '../core/widgets/balanced_text_row.dart';
 import '../core/widgets/custom_image_view.dart';
 
 part 'widgets/header_section.dart';
@@ -26,22 +26,22 @@ class ProfileScreen extends StatelessWidget {
         surfaceTintColor: Colors.white,
         elevation: 4,
         actions: [
-          BlocBuilder<ProfileBloc, ProfileState>(
+          BlocBuilder<UserBloc, UserState>(
               buildWhen: (previous, current) =>
-                  previous.isEditMode != current.isEditMode,
+                  previous.isEdit != current.isEdit,
               builder: (context, state) {
                 return TextButton(
                   onPressed: () => context
-                      .read<ProfileBloc>()
-                      .add(const ProfileEvent.changeMode()),
-                  child: Text(state.isEditMode ? 'Save' : 'Edit'),
+                      .read<UserBloc>()
+                      .add(const UserEvent.changeMode()),
+                  child: Text(state.isEdit ? 'Save' : 'Edit'),
                 );
               }),
         ],
       ),
-      body: BlocBuilder<ProfileBloc, ProfileState>(
+      body: BlocBuilder<UserBloc, UserState>(
           buildWhen: (previous, current) =>
-              previous.isEditMode != current.isEditMode,
+              previous.user.uid != current.user.uid,
           builder: (context, state) {
             return Column(
               children: [
@@ -51,7 +51,7 @@ class ProfileScreen extends StatelessWidget {
                     keyFlex: 3,
                     valueFlex: 5,
                     keyText: 'Username',
-                    valueText: context.read<AuthBloc>().state.user!.displayName,
+                    valueText: context.read<UserBloc>().state.user.displayName,
                     keyTextStyle: Theme.of(context)
                         .textTheme
                         .labelSmall
@@ -67,7 +67,12 @@ class ProfileScreen extends StatelessWidget {
                     keyFlex: 3,
                     valueFlex: 5,
                     keyText: 'Email',
-                    valueText: context.read<AuthBloc>().state.user!.email,
+                    valueText: context
+                        .read<UserBloc>()
+                        .state
+                        .user
+                        .email
+                        .getOrDefaultValue(''),
                     keyTextStyle: Theme.of(context)
                         .textTheme
                         .labelSmall

@@ -11,6 +11,7 @@ class WidgetKeys {
 
   static const Key loginEmailFieldKey = Key('loginEmailFieldKey');
   static const Key loginPasswordFieldKey = Key('loginPasswordFieldKey');
+  static const Key loginButtonKey = Key('loginButtonKey');
 
   static const Key searchIconKey = Key('searchIconKey');
   static const Key clearIconKey = Key('clearIconKey');

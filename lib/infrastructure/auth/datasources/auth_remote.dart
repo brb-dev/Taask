@@ -1,14 +1,19 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:task/domain/core/error/exception.dart';
+import 'package:task/infrastructure/auth/dtos/uid_dto.dart';
 
 import '../../../config.dart';
 import '../../../domain/auth/entities/task_user.dart';
 import '../../../domain/auth/value/value_objects.dart';
 import '../../../domain/core/error/exception_handler.dart';
+import '../../../domain/core/value/value_objects.dart';
 import '../dtos/task_user_dto.dart';
 
 const String userCollection = 'users';
+
+const String uidCreationExceptionMessage = 'Firebase is not able to create UID';
 
 class AuthRemoteDataSource {
   DataSourceExceptionHandler dataSourceExceptionHandler;
@@ -22,31 +27,33 @@ class AuthRemoteDataSource {
     required this.config,
   });
 
-  Future<TaskUser> registerWithEmailAndPassword({
+  Future<UID> registerWithEmailAndPassword({
     required TaskUser user,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       UserCredential userCredential =
           await _auth.createUserWithEmailAndPassword(
-        email: user.email,
+        email: user.email.getOrCrash(),
         password: user.password,
       );
 
-      final String uid = userCredential.user?.uid ?? '';
-
-      //create user document.
-      final Map<String, dynamic> json = TaskUserDto.fromDomain(user).toJson();
-      final DocumentReference<Map<String, dynamic>> documentReference =
-          _firestore.collection(userCollection).doc(uid);
-      await documentReference.set(json);
-
-      final DocumentSnapshot<Map<String, dynamic>> dataMap =
-          await documentReference.get();
-      return TaskUserDto.fromFirebaseDocument(uid, dataMap.data()).toDomain();
+      return UIDDto(uid: userCredential.user?.uid ?? '').toDomain();
     });
   }
 
-  Future<TaskUser> loginWithEmailAndPassword({
+  Future<TaskUser> fetchUser({required UID uid}) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final DocumentReference<Map<String, dynamic>> documentReference =
+          _firestore.collection(userCollection).doc(uid.getOrCrash());
+
+      final document = await documentReference.get();
+
+      return TaskUserDto.fromFirebaseDocument(document.id, document.data())
+          .toDomain();
+    });
+  }
+
+  Future<UID> loginWithEmailAndPassword({
     required String email,
     required String password,
   }) async {
@@ -56,16 +63,20 @@ class AuthRemoteDataSource {
         password: password,
       );
 
-      final String uid = userCredential.user?.uid ?? '';
+      return UIDDto(uid: userCredential.user?.uid ?? '').toDomain();
+    });
+  }
 
+  Future<Unit> addUserToFirestore({
+    required UID uid,
+    required TaskUser user,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final Map<String, dynamic> json = TaskUserDto.fromDomain(user).toJson();
       final DocumentReference<Map<String, dynamic>> documentReference =
-          _firestore.collection(userCollection).doc(uid);
-
-      final documentSnapshot = await documentReference.get();
-
-      final data = documentSnapshot.data() ?? {};
-
-      return TaskUserDto.fromJson(data).toDomain();
+          _firestore.collection(userCollection).doc(uid.getOrCrash());
+      await documentReference.set(json);
+      return unit;
     });
   }
 

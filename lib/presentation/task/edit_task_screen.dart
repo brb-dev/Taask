@@ -1,15 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:task/application/auth/auth_bloc.dart';
-import 'package:task/application/task/task_bloc.dart';
-import 'package:task/domain/auth/entities/task_user.dart';
-import 'package:task/domain/task/value/value_objects.dart';
 
+import '../../application/auth/user/user_bloc.dart';
 import '../../application/task/manage_task/manage_task_bloc.dart';
+import '../../application/task/task_bloc.dart';
 import '../../domain/core/dropdown/generic_dropdown_data.dart';
 import '../../domain/core/utils/error_utils.dart';
 import '../../domain/task/entities/task_entity.dart';
+import '../../domain/task/value/value_objects.dart';
 import '../core/widgets/dropdown/generic_dropdown.dart';
 import '../core/widgets/form_field/generic_text_field.dart';
 import '../core/widgets/loading_shimmer/loading_shimmer.dart';
@@ -49,8 +48,7 @@ class EditTaskScreen extends StatelessWidget {
                     );
                 context.read<TaskBloc>().add(
                       TaskEvent.fetchTaskList(
-                        user: context.read<AuthBloc>().state.user ??
-                            TaskUser.empty(),
+                        user: context.read<UserBloc>().state.user,
                         filter: taskState.appliedFilter,
                         searchKey: taskState.searchKey,
                       ),

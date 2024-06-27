@@ -22,10 +22,16 @@ TaskUserDto _$TaskUserDtoFromJson(Map<String, dynamic> json) {
 mixin _$TaskUserDto {
   @JsonKey(name: 'uid', defaultValue: '', includeToJson: false)
   String get uid => throw _privateConstructorUsedError;
+  @JsonKey(name: 'name', defaultValue: '')
+  String get name => throw _privateConstructorUsedError;
   @JsonKey(name: 'userName', defaultValue: '')
   String get userName => throw _privateConstructorUsedError;
   @JsonKey(name: 'password', defaultValue: '', toJson: hidePassword)
   String get password => throw _privateConstructorUsedError;
+  @JsonKey(name: 'gender', defaultValue: '')
+  String get gender => throw _privateConstructorUsedError;
+  @JsonKey(name: 'dob', defaultValue: '')
+  String get dob => throw _privateConstructorUsedError;
   @JsonKey(name: 'email', defaultValue: '')
   String get email => throw _privateConstructorUsedError;
   @JsonKey(name: 'displayName', defaultValue: '')
@@ -47,9 +53,12 @@ abstract class $TaskUserDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'uid', defaultValue: '', includeToJson: false) String uid,
+      @JsonKey(name: 'name', defaultValue: '') String name,
       @JsonKey(name: 'userName', defaultValue: '') String userName,
       @JsonKey(name: 'password', defaultValue: '', toJson: hidePassword)
       String password,
+      @JsonKey(name: 'gender', defaultValue: '') String gender,
+      @JsonKey(name: 'dob', defaultValue: '') String dob,
       @JsonKey(name: 'email', defaultValue: '') String email,
       @JsonKey(name: 'displayName', defaultValue: '') String displayName,
       @JsonKey(name: 'profilePicUrl', defaultValue: '') String profilePicUrl});
@@ -69,8 +78,11 @@ class _$TaskUserDtoCopyWithImpl<$Res, $Val extends TaskUserDto>
   @override
   $Res call({
     Object? uid = null,
+    Object? name = null,
     Object? userName = null,
     Object? password = null,
+    Object? gender = null,
+    Object? dob = null,
     Object? email = null,
     Object? displayName = null,
     Object? profilePicUrl = null,
@@ -80,6 +92,10 @@ class _$TaskUserDtoCopyWithImpl<$Res, $Val extends TaskUserDto>
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
       userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
@@ -87,6 +103,14 @@ class _$TaskUserDtoCopyWithImpl<$Res, $Val extends TaskUserDto>
       password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      gender: null == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String,
+      dob: null == dob
+          ? _value.dob
+          : dob // ignore: cast_nullable_to_non_nullable
               as String,
       email: null == email
           ? _value.email
@@ -114,9 +138,12 @@ abstract class _$$TaskUserDtoImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'uid', defaultValue: '', includeToJson: false) String uid,
+      @JsonKey(name: 'name', defaultValue: '') String name,
       @JsonKey(name: 'userName', defaultValue: '') String userName,
       @JsonKey(name: 'password', defaultValue: '', toJson: hidePassword)
       String password,
+      @JsonKey(name: 'gender', defaultValue: '') String gender,
+      @JsonKey(name: 'dob', defaultValue: '') String dob,
       @JsonKey(name: 'email', defaultValue: '') String email,
       @JsonKey(name: 'displayName', defaultValue: '') String displayName,
       @JsonKey(name: 'profilePicUrl', defaultValue: '') String profilePicUrl});
@@ -134,8 +161,11 @@ class __$$TaskUserDtoImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? uid = null,
+    Object? name = null,
     Object? userName = null,
     Object? password = null,
+    Object? gender = null,
+    Object? dob = null,
     Object? email = null,
     Object? displayName = null,
     Object? profilePicUrl = null,
@@ -145,6 +175,10 @@ class __$$TaskUserDtoImplCopyWithImpl<$Res>
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
       userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
@@ -152,6 +186,14 @@ class __$$TaskUserDtoImplCopyWithImpl<$Res>
       password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      gender: null == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String,
+      dob: null == dob
+          ? _value.dob
+          : dob // ignore: cast_nullable_to_non_nullable
               as String,
       email: null == email
           ? _value.email
@@ -175,9 +217,12 @@ class _$TaskUserDtoImpl extends _TaskUserDto {
   const _$TaskUserDtoImpl(
       {@JsonKey(name: 'uid', defaultValue: '', includeToJson: false)
       required this.uid,
+      @JsonKey(name: 'name', defaultValue: '') required this.name,
       @JsonKey(name: 'userName', defaultValue: '') required this.userName,
       @JsonKey(name: 'password', defaultValue: '', toJson: hidePassword)
       required this.password,
+      @JsonKey(name: 'gender', defaultValue: '') required this.gender,
+      @JsonKey(name: 'dob', defaultValue: '') required this.dob,
       @JsonKey(name: 'email', defaultValue: '') required this.email,
       @JsonKey(name: 'displayName', defaultValue: '') required this.displayName,
       @JsonKey(name: 'profilePicUrl', defaultValue: '')
@@ -191,11 +236,20 @@ class _$TaskUserDtoImpl extends _TaskUserDto {
   @JsonKey(name: 'uid', defaultValue: '', includeToJson: false)
   final String uid;
   @override
+  @JsonKey(name: 'name', defaultValue: '')
+  final String name;
+  @override
   @JsonKey(name: 'userName', defaultValue: '')
   final String userName;
   @override
   @JsonKey(name: 'password', defaultValue: '', toJson: hidePassword)
   final String password;
+  @override
+  @JsonKey(name: 'gender', defaultValue: '')
+  final String gender;
+  @override
+  @JsonKey(name: 'dob', defaultValue: '')
+  final String dob;
   @override
   @JsonKey(name: 'email', defaultValue: '')
   final String email;
@@ -208,7 +262,7 @@ class _$TaskUserDtoImpl extends _TaskUserDto {
 
   @override
   String toString() {
-    return 'TaskUserDto(uid: $uid, userName: $userName, password: $password, email: $email, displayName: $displayName, profilePicUrl: $profilePicUrl)';
+    return 'TaskUserDto(uid: $uid, name: $name, userName: $userName, password: $password, gender: $gender, dob: $dob, email: $email, displayName: $displayName, profilePicUrl: $profilePicUrl)';
   }
 
   @override
@@ -217,10 +271,13 @@ class _$TaskUserDtoImpl extends _TaskUserDto {
         (other.runtimeType == runtimeType &&
             other is _$TaskUserDtoImpl &&
             (identical(other.uid, uid) || other.uid == uid) &&
+            (identical(other.name, name) || other.name == name) &&
             (identical(other.userName, userName) ||
                 other.userName == userName) &&
             (identical(other.password, password) ||
                 other.password == password) &&
+            (identical(other.gender, gender) || other.gender == gender) &&
+            (identical(other.dob, dob) || other.dob == dob) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.displayName, displayName) ||
                 other.displayName == displayName) &&
@@ -230,8 +287,8 @@ class _$TaskUserDtoImpl extends _TaskUserDto {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, uid, userName, password, email, displayName, profilePicUrl);
+  int get hashCode => Object.hash(runtimeType, uid, name, userName, password,
+      gender, dob, email, displayName, profilePicUrl);
 
   @JsonKey(ignore: true)
   @override
@@ -251,10 +308,13 @@ abstract class _TaskUserDto extends TaskUserDto {
   const factory _TaskUserDto(
       {@JsonKey(name: 'uid', defaultValue: '', includeToJson: false)
       required final String uid,
+      @JsonKey(name: 'name', defaultValue: '') required final String name,
       @JsonKey(name: 'userName', defaultValue: '')
       required final String userName,
       @JsonKey(name: 'password', defaultValue: '', toJson: hidePassword)
       required final String password,
+      @JsonKey(name: 'gender', defaultValue: '') required final String gender,
+      @JsonKey(name: 'dob', defaultValue: '') required final String dob,
       @JsonKey(name: 'email', defaultValue: '') required final String email,
       @JsonKey(name: 'displayName', defaultValue: '')
       required final String displayName,
@@ -269,11 +329,20 @@ abstract class _TaskUserDto extends TaskUserDto {
   @JsonKey(name: 'uid', defaultValue: '', includeToJson: false)
   String get uid;
   @override
+  @JsonKey(name: 'name', defaultValue: '')
+  String get name;
+  @override
   @JsonKey(name: 'userName', defaultValue: '')
   String get userName;
   @override
   @JsonKey(name: 'password', defaultValue: '', toJson: hidePassword)
   String get password;
+  @override
+  @JsonKey(name: 'gender', defaultValue: '')
+  String get gender;
+  @override
+  @JsonKey(name: 'dob', defaultValue: '')
+  String get dob;
   @override
   @JsonKey(name: 'email', defaultValue: '')
   String get email;

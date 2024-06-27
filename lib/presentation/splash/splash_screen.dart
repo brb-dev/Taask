@@ -2,8 +2,12 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:task/application/task/task_bloc.dart';
 
 import '../../application/auth/auth_bloc.dart';
+import '../../application/auth/user/user_bloc.dart';
+import '../../domain/core/value/value_objects.dart';
+import '../../domain/task/entities/task_filter_entity.dart';
 import '../core/router/app_router.gr.dart';
 import '../core/theme/app_color.dart';
 import '../core/utils/app_assets.dart';
@@ -59,6 +63,7 @@ class _SplashScreenState extends State<SplashScreen>
               initial: (_) => _showLoadingDialog(context),
               loading: (_) => _showLoadingDialog(context),
               authenticated: (authState) {
+                context.read<UserBloc>().add(const UserEvent.fetch());
                 context.router.replaceAll(
                   [
                     const SplashRoute(),
@@ -75,6 +80,19 @@ class _SplashScreenState extends State<SplashScreen>
                 );
               },
             );
+          },
+        ),
+        BlocListener<UserBloc, UserState>(
+          listenWhen: (previous, current) =>
+              previous.user.uid != current.user.uid,
+          listener: (context, state) {
+            context.read<TaskBloc>().add(
+                  TaskEvent.fetchTaskList(
+                    user: state.user,
+                    searchKey: SearchKey(''),
+                    filter: TaskFilterEntity.empty(),
+                  ),
+                );
           },
         ),
       ],

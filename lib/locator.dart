@@ -1,10 +1,10 @@
 import 'package:get_it/get_it.dart';
-import 'package:task/application/profile/profile_bloc.dart';
-import 'package:task/application/task/manage_task/manage_task_bloc.dart';
 
 import 'application/auth/auth_bloc.dart';
 import 'application/auth/login/login_form_bloc.dart';
 import 'application/auth/register/register_form_bloc.dart';
+import 'application/auth/user/user_bloc.dart';
+import 'application/task/manage_task/manage_task_bloc.dart';
 import 'application/task/task_bloc.dart';
 import 'application/task/task_filter/task_filter_bloc.dart';
 import 'config.dart';
@@ -12,6 +12,8 @@ import 'domain/core/error/exception_handler.dart';
 import 'infrastructure/auth/datasources/auth_local.dart';
 import 'infrastructure/auth/datasources/auth_remote.dart';
 import 'infrastructure/auth/repositories/auth_repository.dart';
+import 'infrastructure/core/local_storage/secure_storage.dart';
+import 'infrastructure/core/local_storage/uid_storage.dart';
 import 'infrastructure/task/datasources/task_local.dart';
 import 'infrastructure/task/datasources/task_remote.dart';
 import 'infrastructure/task/repositories/task_repository.dart';
@@ -24,6 +26,11 @@ void setupLocator() {
   locator.registerLazySingleton(() => Config());
   locator.registerLazySingleton(() => AppRouter());
   locator.registerLazySingleton(() => AppRouterObserver());
+
+  locator.registerLazySingleton(() => SecureStorage());
+  locator.registerLazySingleton(
+    () => UidStorage(secureStorage: locator<SecureStorage>()),
+  );
 
   locator.registerLazySingleton(() => DataSourceExceptionHandler());
   locator.registerLazySingleton(() => AuthLocalDataSource());
@@ -38,6 +45,7 @@ void setupLocator() {
       config: locator<Config>(),
       remoteDataSource: locator<AuthRemoteDataSource>(),
       localDataSource: locator<AuthLocalDataSource>(),
+      uidStorage: locator<UidStorage>(),
     ),
   );
   locator.registerLazySingleton(
@@ -54,6 +62,11 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => RegisterFormBloc(
       authRepository: locator<AuthRepository>(),
+    ),
+  );
+  locator.registerLazySingleton(
+    () => UserBloc(
+      repository: locator<AuthRepository>(),
     ),
   );
   locator.registerLazySingleton(() => TaskLocalDataSource());
@@ -78,10 +91,6 @@ void setupLocator() {
   );
   locator.registerLazySingleton(
     () => TaskFilterBloc(),
-  );
-
-  locator.registerLazySingleton(
-    () => ProfileBloc(),
   );
   locator.registerLazySingleton(
     () => ManageTaskBloc(

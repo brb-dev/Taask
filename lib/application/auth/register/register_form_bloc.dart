@@ -64,7 +64,7 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
               await authRepository.registerWithEmailAndPassword(
                   user: TaskUser.empty().copyWith(
             displayName: state.username.getOrCrash(),
-            email: state.email.getOrCrash(),
+            email: state.email,
             password: state.password.getOrCrash(),
             userName: state.username.getOrCrash(),
           ));

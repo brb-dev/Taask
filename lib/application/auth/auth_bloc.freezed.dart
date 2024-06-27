@@ -405,29 +405,28 @@ abstract class _Logout implements AuthEvent {
 
 /// @nodoc
 mixin _$AuthState {
-  TaskUser? get user => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(TaskUser? user) initial,
-    required TResult Function(TaskUser? user) loading,
-    required TResult Function(TaskUser? user) authenticated,
-    required TResult Function(TaskUser? user) unauthenticated,
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() authenticated,
+    required TResult Function() unauthenticated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(TaskUser? user)? initial,
-    TResult? Function(TaskUser? user)? loading,
-    TResult? Function(TaskUser? user)? authenticated,
-    TResult? Function(TaskUser? user)? unauthenticated,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? authenticated,
+    TResult? Function()? unauthenticated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TaskUser? user)? initial,
-    TResult Function(TaskUser? user)? loading,
-    TResult Function(TaskUser? user)? authenticated,
-    TResult Function(TaskUser? user)? unauthenticated,
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? authenticated,
+    TResult Function()? unauthenticated,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -456,20 +455,12 @@ mixin _$AuthState {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $AuthStateCopyWith<AuthState> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $AuthStateCopyWith<$Res> {
   factory $AuthStateCopyWith(AuthState value, $Res Function(AuthState) then) =
       _$AuthStateCopyWithImpl<$Res, AuthState>;
-  @useResult
-  $Res call({TaskUser? user});
-
-  $TaskUserCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -481,45 +472,13 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? user = freezed,
-  }) {
-    return _then(_value.copyWith(
-      user: freezed == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as TaskUser?,
-    ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $TaskUserCopyWith<$Res>? get user {
-    if (_value.user == null) {
-      return null;
-    }
-
-    return $TaskUserCopyWith<$Res>(_value.user!, (value) {
-      return _then(_value.copyWith(user: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
-abstract class _$$InitialImplCopyWith<$Res>
-    implements $AuthStateCopyWith<$Res> {
+abstract class _$$InitialImplCopyWith<$Res> {
   factory _$$InitialImplCopyWith(
           _$InitialImpl value, $Res Function(_$InitialImpl) then) =
       __$$InitialImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({TaskUser? user});
-
-  @override
-  $TaskUserCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -529,84 +488,60 @@ class __$$InitialImplCopyWithImpl<$Res>
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? user = freezed,
-  }) {
-    return _then(_$InitialImpl(
-      user: freezed == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as TaskUser?,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$InitialImpl implements _Initial {
-  const _$InitialImpl({this.user});
-
-  @override
-  final TaskUser? user;
+  const _$InitialImpl();
 
   @override
   String toString() {
-    return 'AuthState.initial(user: $user)';
+    return 'AuthState.initial()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$InitialImpl &&
-            (identical(other.user, user) || other.user == user));
+        (other.runtimeType == runtimeType && other is _$InitialImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
-      __$$InitialImplCopyWithImpl<_$InitialImpl>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(TaskUser? user) initial,
-    required TResult Function(TaskUser? user) loading,
-    required TResult Function(TaskUser? user) authenticated,
-    required TResult Function(TaskUser? user) unauthenticated,
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() authenticated,
+    required TResult Function() unauthenticated,
   }) {
-    return initial(user);
+    return initial();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(TaskUser? user)? initial,
-    TResult? Function(TaskUser? user)? loading,
-    TResult? Function(TaskUser? user)? authenticated,
-    TResult? Function(TaskUser? user)? unauthenticated,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? authenticated,
+    TResult? Function()? unauthenticated,
   }) {
-    return initial?.call(user);
+    return initial?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TaskUser? user)? initial,
-    TResult Function(TaskUser? user)? loading,
-    TResult Function(TaskUser? user)? authenticated,
-    TResult Function(TaskUser? user)? unauthenticated,
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? authenticated,
+    TResult Function()? unauthenticated,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(user);
+      return initial();
     }
     return orElse();
   }
@@ -650,28 +585,14 @@ class _$InitialImpl implements _Initial {
 }
 
 abstract class _Initial implements AuthState {
-  const factory _Initial({final TaskUser? user}) = _$InitialImpl;
-
-  @override
-  TaskUser? get user;
-  @override
-  @JsonKey(ignore: true)
-  _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _Initial() = _$InitialImpl;
 }
 
 /// @nodoc
-abstract class _$$LoadingImplCopyWith<$Res>
-    implements $AuthStateCopyWith<$Res> {
+abstract class _$$LoadingImplCopyWith<$Res> {
   factory _$$LoadingImplCopyWith(
           _$LoadingImpl value, $Res Function(_$LoadingImpl) then) =
       __$$LoadingImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({TaskUser? user});
-
-  @override
-  $TaskUserCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -681,84 +602,60 @@ class __$$LoadingImplCopyWithImpl<$Res>
   __$$LoadingImplCopyWithImpl(
       _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? user = freezed,
-  }) {
-    return _then(_$LoadingImpl(
-      user: freezed == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as TaskUser?,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$LoadingImpl implements _Loading {
-  const _$LoadingImpl({this.user});
-
-  @override
-  final TaskUser? user;
+  const _$LoadingImpl();
 
   @override
   String toString() {
-    return 'AuthState.loading(user: $user)';
+    return 'AuthState.loading()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LoadingImpl &&
-            (identical(other.user, user) || other.user == user));
+        (other.runtimeType == runtimeType && other is _$LoadingImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$LoadingImplCopyWith<_$LoadingImpl> get copyWith =>
-      __$$LoadingImplCopyWithImpl<_$LoadingImpl>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(TaskUser? user) initial,
-    required TResult Function(TaskUser? user) loading,
-    required TResult Function(TaskUser? user) authenticated,
-    required TResult Function(TaskUser? user) unauthenticated,
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() authenticated,
+    required TResult Function() unauthenticated,
   }) {
-    return loading(user);
+    return loading();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(TaskUser? user)? initial,
-    TResult? Function(TaskUser? user)? loading,
-    TResult? Function(TaskUser? user)? authenticated,
-    TResult? Function(TaskUser? user)? unauthenticated,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? authenticated,
+    TResult? Function()? unauthenticated,
   }) {
-    return loading?.call(user);
+    return loading?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TaskUser? user)? initial,
-    TResult Function(TaskUser? user)? loading,
-    TResult Function(TaskUser? user)? authenticated,
-    TResult Function(TaskUser? user)? unauthenticated,
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? authenticated,
+    TResult Function()? unauthenticated,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading(user);
+      return loading();
     }
     return orElse();
   }
@@ -802,28 +699,14 @@ class _$LoadingImpl implements _Loading {
 }
 
 abstract class _Loading implements AuthState {
-  const factory _Loading({final TaskUser? user}) = _$LoadingImpl;
-
-  @override
-  TaskUser? get user;
-  @override
-  @JsonKey(ignore: true)
-  _$$LoadingImplCopyWith<_$LoadingImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _Loading() = _$LoadingImpl;
 }
 
 /// @nodoc
-abstract class _$$AuthenticatedImplCopyWith<$Res>
-    implements $AuthStateCopyWith<$Res> {
+abstract class _$$AuthenticatedImplCopyWith<$Res> {
   factory _$$AuthenticatedImplCopyWith(
           _$AuthenticatedImpl value, $Res Function(_$AuthenticatedImpl) then) =
       __$$AuthenticatedImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({TaskUser? user});
-
-  @override
-  $TaskUserCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -833,84 +716,60 @@ class __$$AuthenticatedImplCopyWithImpl<$Res>
   __$$AuthenticatedImplCopyWithImpl(
       _$AuthenticatedImpl _value, $Res Function(_$AuthenticatedImpl) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? user = freezed,
-  }) {
-    return _then(_$AuthenticatedImpl(
-      user: freezed == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as TaskUser?,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$AuthenticatedImpl implements _Authenticated {
-  const _$AuthenticatedImpl({this.user});
-
-  @override
-  final TaskUser? user;
+  const _$AuthenticatedImpl();
 
   @override
   String toString() {
-    return 'AuthState.authenticated(user: $user)';
+    return 'AuthState.authenticated()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$AuthenticatedImpl &&
-            (identical(other.user, user) || other.user == user));
+        (other.runtimeType == runtimeType && other is _$AuthenticatedImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$AuthenticatedImplCopyWith<_$AuthenticatedImpl> get copyWith =>
-      __$$AuthenticatedImplCopyWithImpl<_$AuthenticatedImpl>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(TaskUser? user) initial,
-    required TResult Function(TaskUser? user) loading,
-    required TResult Function(TaskUser? user) authenticated,
-    required TResult Function(TaskUser? user) unauthenticated,
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() authenticated,
+    required TResult Function() unauthenticated,
   }) {
-    return authenticated(user);
+    return authenticated();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(TaskUser? user)? initial,
-    TResult? Function(TaskUser? user)? loading,
-    TResult? Function(TaskUser? user)? authenticated,
-    TResult? Function(TaskUser? user)? unauthenticated,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? authenticated,
+    TResult? Function()? unauthenticated,
   }) {
-    return authenticated?.call(user);
+    return authenticated?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TaskUser? user)? initial,
-    TResult Function(TaskUser? user)? loading,
-    TResult Function(TaskUser? user)? authenticated,
-    TResult Function(TaskUser? user)? unauthenticated,
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? authenticated,
+    TResult Function()? unauthenticated,
     required TResult orElse(),
   }) {
     if (authenticated != null) {
-      return authenticated(user);
+      return authenticated();
     }
     return orElse();
   }
@@ -954,28 +813,14 @@ class _$AuthenticatedImpl implements _Authenticated {
 }
 
 abstract class _Authenticated implements AuthState {
-  const factory _Authenticated({final TaskUser? user}) = _$AuthenticatedImpl;
-
-  @override
-  TaskUser? get user;
-  @override
-  @JsonKey(ignore: true)
-  _$$AuthenticatedImplCopyWith<_$AuthenticatedImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _Authenticated() = _$AuthenticatedImpl;
 }
 
 /// @nodoc
-abstract class _$$UnauthenticatedImplCopyWith<$Res>
-    implements $AuthStateCopyWith<$Res> {
+abstract class _$$UnauthenticatedImplCopyWith<$Res> {
   factory _$$UnauthenticatedImplCopyWith(_$UnauthenticatedImpl value,
           $Res Function(_$UnauthenticatedImpl) then) =
       __$$UnauthenticatedImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({TaskUser? user});
-
-  @override
-  $TaskUserCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -985,85 +830,60 @@ class __$$UnauthenticatedImplCopyWithImpl<$Res>
   __$$UnauthenticatedImplCopyWithImpl(
       _$UnauthenticatedImpl _value, $Res Function(_$UnauthenticatedImpl) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? user = freezed,
-  }) {
-    return _then(_$UnauthenticatedImpl(
-      user: freezed == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as TaskUser?,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$UnauthenticatedImpl implements _Unauthenticated {
-  const _$UnauthenticatedImpl({this.user});
-
-  @override
-  final TaskUser? user;
+  const _$UnauthenticatedImpl();
 
   @override
   String toString() {
-    return 'AuthState.unauthenticated(user: $user)';
+    return 'AuthState.unauthenticated()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$UnauthenticatedImpl &&
-            (identical(other.user, user) || other.user == user));
+        (other.runtimeType == runtimeType && other is _$UnauthenticatedImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$UnauthenticatedImplCopyWith<_$UnauthenticatedImpl> get copyWith =>
-      __$$UnauthenticatedImplCopyWithImpl<_$UnauthenticatedImpl>(
-          this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(TaskUser? user) initial,
-    required TResult Function(TaskUser? user) loading,
-    required TResult Function(TaskUser? user) authenticated,
-    required TResult Function(TaskUser? user) unauthenticated,
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() authenticated,
+    required TResult Function() unauthenticated,
   }) {
-    return unauthenticated(user);
+    return unauthenticated();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(TaskUser? user)? initial,
-    TResult? Function(TaskUser? user)? loading,
-    TResult? Function(TaskUser? user)? authenticated,
-    TResult? Function(TaskUser? user)? unauthenticated,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? authenticated,
+    TResult? Function()? unauthenticated,
   }) {
-    return unauthenticated?.call(user);
+    return unauthenticated?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TaskUser? user)? initial,
-    TResult Function(TaskUser? user)? loading,
-    TResult Function(TaskUser? user)? authenticated,
-    TResult Function(TaskUser? user)? unauthenticated,
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? authenticated,
+    TResult Function()? unauthenticated,
     required TResult orElse(),
   }) {
     if (unauthenticated != null) {
-      return unauthenticated(user);
+      return unauthenticated();
     }
     return orElse();
   }
@@ -1107,13 +927,5 @@ class _$UnauthenticatedImpl implements _Unauthenticated {
 }
 
 abstract class _Unauthenticated implements AuthState {
-  const factory _Unauthenticated({final TaskUser? user}) =
-      _$UnauthenticatedImpl;
-
-  @override
-  TaskUser? get user;
-  @override
-  @JsonKey(ignore: true)
-  _$$UnauthenticatedImplCopyWith<_$UnauthenticatedImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _Unauthenticated() = _$UnauthenticatedImpl;
 }

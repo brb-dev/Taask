@@ -1,5 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:task/application/auth/user/user_bloc.dart';
+import 'package:task/presentation/core/widgets/loading_shimmer/loading_shimmer.dart';
 
 import 'core/router/app_router.gr.dart';
 import 'core/utils/app_assets.dart';
@@ -49,53 +52,61 @@ class _CustomTabBarState extends State<_CustomTabBar>
       vsync: this,
     );
 
-    return Material(
-      color: Colors.white,
-      child: AutoTabsRouter.pageView(
-        physics: const NeverScrollableScrollPhysics(),
-        routes: routerList,
-        builder: (context, child, _) {
-          final tabsRouter = AutoTabsRouter.of(context);
-          tabController?.animateTo(tabsRouter.activeIndex);
+    return BlocBuilder<UserBloc, UserState>(
+        buildWhen: (previous, current) => previous.user.uid != current.user.uid,
+        builder: (context, state) {
+          return Material(
+            color: Colors.white,
+            child: state.user.uid.isEmpty
+                ? LoadingShimmer.logo()
+                : AutoTabsRouter.pageView(
+                    physics: const NeverScrollableScrollPhysics(),
+                    routes: routerList,
+                    builder: (context, child, _) {
+                      final tabsRouter = AutoTabsRouter.of(context);
+                      tabController?.animateTo(tabsRouter.activeIndex);
 
-          return Column(
-            children: [
-              Expanded(child: child),
-              SafeArea(
-                bottom: true,
-                top: false,
-                child: TabBar(
-                  controller: tabController,
-                  labelColor: Theme.of(context).primaryColor,
-                  unselectedLabelColor:
-                      Theme.of(context).colorScheme.inversePrimary,
-                  labelStyle: Theme.of(context).textTheme.bodyMedium,
-                  unselectedLabelStyle: Theme.of(context).textTheme.bodyMedium,
-                  indicator: const BoxDecoration(
-                    color: Colors.transparent,
+                      return Column(
+                        children: [
+                          Expanded(child: child),
+                          SafeArea(
+                            bottom: true,
+                            top: false,
+                            child: TabBar(
+                              controller: tabController,
+                              labelColor: Theme.of(context).primaryColor,
+                              unselectedLabelColor:
+                                  Theme.of(context).colorScheme.inversePrimary,
+                              labelStyle:
+                                  Theme.of(context).textTheme.bodyMedium,
+                              unselectedLabelStyle:
+                                  Theme.of(context).textTheme.bodyMedium,
+                              indicator: const BoxDecoration(
+                                color: Colors.transparent,
+                              ),
+                              onTap: (index) {
+                                tabsRouter.setActiveIndex(index);
+                              },
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 8.0,
+                              ),
+                              labelPadding: EdgeInsets.zero,
+                              tabs: _getTabs(context)
+                                  .map(
+                                    (item) => Tab(
+                                      icon: item.icon,
+                                      text: item.label,
+                                    ),
+                                  )
+                                  .toList(),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
                   ),
-                  onTap: (index) {
-                    tabsRouter.setActiveIndex(index);
-                  },
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 8.0,
-                  ),
-                  labelPadding: EdgeInsets.zero,
-                  tabs: _getTabs(context)
-                      .map(
-                        (item) => Tab(
-                          icon: item.icon,
-                          text: item.label,
-                        ),
-                      )
-                      .toList(),
-                ),
-              ),
-            ],
           );
-        },
-      ),
-    );
+        });
   }
 }
 
