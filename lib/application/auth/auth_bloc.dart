@@ -15,8 +15,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final IAuthRepository authRepository;
   final Config config;
 
-  late StreamSubscription<User?> _userSubscription;
-
   AuthBloc({
     required this.authRepository,
     required this.config,
@@ -52,14 +50,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
   }
 
-  @override
+  /*@override
   void onChange(Change<AuthState> change) {
     super.onChange(change);
-  }
-
-  @override
-  Future<void> close() {
-    _userSubscription.cancel();
-    return super.close();
-  }
+  }*/
 }
