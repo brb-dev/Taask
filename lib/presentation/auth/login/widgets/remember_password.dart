@@ -15,7 +15,7 @@ class _RememberPassword extends StatelessWidget {
             Row(
               children: [
                 Checkbox(
-                  key: const Key('rememberPasswordKey'),
+                  key: WidgetKeys.rememberPasswordKey,
                   value: state.rememberPassword,
                   onChanged: (value) {
                     FocusScope.of(context).unfocus();

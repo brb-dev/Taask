@@ -49,9 +49,4 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       },
     );
   }
-
-  /*@override
-  void onChange(Change<AuthState> change) {
-    super.onChange(change);
-  }*/
 }

@@ -20,6 +20,7 @@ final appThemeData = {
     appBarTheme: _appBarTheme(),
 
     //button theme
+    floatingActionButtonTheme: _floatingActionButtonTheme(),
     elevatedButtonTheme: _elevatedButtonTheme(),
     outlinedButtonTheme: _outlinedButtonTheme(),
   ),
@@ -62,6 +63,14 @@ OutlinedButtonThemeData _outlinedButtonTheme() {
       elevation: 0,
       minimumSize: const Size(120, 45),
     ),
+  );
+}
+
+FloatingActionButtonThemeData _floatingActionButtonTheme() {
+  return FloatingActionButtonThemeData(
+    elevation: 0,
+    backgroundColor: AppColor.darkCyan50,
+    foregroundColor: AppColor.white,
   );
 }
 

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
+import '../../utils/widget_keys.dart';
+
 class CustomSlidable extends StatelessWidget {
   final Widget child;
   final bool enabled;
@@ -22,7 +24,7 @@ class CustomSlidable extends StatelessWidget {
     if (!enabled) return Center(child: child);
 
     return Slidable(
-      key: const Key('slidable'),
+      key: WidgetKeys.slidable,
       endActionPane: endActionPaneActions.isEmpty
           ? null
           : ActionPane(

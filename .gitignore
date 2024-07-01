@@ -44,3 +44,9 @@ app.*.map.json
 
 # Adding FVM
 /.fvm/flutter_sdk
+
+# Flutter test coverage related
+/coverage
+tests.output
+.scannerwork/.sonar_lock
+.scannerwork/report-task.txt

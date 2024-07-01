@@ -81,7 +81,7 @@ class ManageTaskBloc extends Bloc<ManageTaskEvent, ManageTaskState> {
       deleteTask: (e) async {
         emit(
           state.copyWith(
-            isSubmitting: true,
+            isDeleting: true,
             failureOrSuccessOption: none(),
           ),
         );
@@ -91,7 +91,7 @@ class ManageTaskBloc extends Bloc<ManageTaskEvent, ManageTaskState> {
           (failure) {
             emit(
               state.copyWith(
-                isSubmitting: false,
+                isDeleting: false,
                 failureOrSuccessOption: optionOf(failureOrSuccess),
               ),
             );
@@ -99,7 +99,7 @@ class ManageTaskBloc extends Bloc<ManageTaskEvent, ManageTaskState> {
           (success) {
             emit(
               state.copyWith(
-                isSubmitting: false,
+                isDeleting: false,
               ),
             );
           },

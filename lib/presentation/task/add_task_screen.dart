@@ -8,6 +8,7 @@ import '../../application/task/task_bloc.dart';
 import '../../domain/core/dropdown/generic_dropdown_data.dart';
 import '../../domain/core/utils/error_utils.dart';
 import '../../domain/task/entities/task_entity.dart';
+import '../core/utils/widget_keys.dart';
 import '../core/widgets/dropdown/generic_dropdown.dart';
 import '../core/widgets/form_field/generic_text_field.dart';
 import '../core/widgets/loading_shimmer/loading_shimmer.dart';
@@ -86,7 +87,7 @@ class AddTaskScreen extends StatelessWidget {
               child: Column(
                 children: [
                   GenericDropdown(
-                    key: const Key('taskStatusKey'),
+                    key: WidgetKeys.taskStatusKey,
                     labelText: 'Select Task status',
                     validator: (_) => state.task.status.value.fold(
                       (f) => f.maybeMap(
@@ -176,7 +177,7 @@ class _AddTaskButton extends StatelessWidget {
           previous.isSubmitting != current.isSubmitting,
       builder: (context, state) {
         return ElevatedButton(
-          key: const Key('addTaskButton'),
+          key: WidgetKeys.addTaskButton,
           onPressed: state.isSubmitting
               ? null
               : () {

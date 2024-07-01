@@ -1,22 +1,22 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:task/application/auth/auth_bloc.dart';
-import 'package:task/application/auth/user/user_bloc.dart';
-import 'package:task/application/task/manage_task/manage_task_bloc.dart';
-import 'package:task/presentation/core/router/app_router.gr.dart';
-import 'package:task/presentation/core/router/route_name.dart';
 
+import '../../application/auth/user/user_bloc.dart';
+import '../../application/task/manage_task/manage_task_bloc.dart';
 import '../../application/task/task_bloc.dart';
 import '../../application/task/task_filter/task_filter_bloc.dart';
 import '../../domain/core/utils/error_utils.dart';
 import '../../domain/core/value/value_objects.dart';
 import '../../domain/task/entities/task_entity.dart';
 import '../../domain/task/entities/task_filter_entity.dart';
+import '../core/router/app_router.gr.dart';
+import '../core/router/route_name.dart';
 import '../core/theme/app_color.dart';
 import '../core/utils/widget_keys.dart';
 import '../core/widgets/button/scale_button.dart';
 import '../core/widgets/list/scroll_list.dart';
+import '../core/widgets/loading_shimmer/loading_shimmer.dart';
 import '../core/widgets/no_record_found.dart';
 import '../core/widgets/search_bar/custom_search_bar.dart';
 import '../core/widgets/slidable/custom_slidable.dart';
@@ -29,6 +29,7 @@ part 'widgets/filter_app_bar.dart';
 part 'widgets/task_status_picker.dart';
 part 'widgets/filter_reset_button.dart';
 part 'widgets/filter_apply_button.dart';
+part 'widgets/task_item.dart';
 
 @RoutePage()
 class HomeScreen extends StatefulWidget {
@@ -92,30 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (context, state) {
           return ScrollList<TaskEntity>(
             isLoading: state.isFetching,
-            itemBuilder: (context, index, item) {
-              return CustomSlidable(
-                endActionPaneActions: [
-                  CustomSlidableAction(
-                    label: 'Delete',
-                    icon: Icons.delete_outline,
-                    onPressed: (context) => context.read<ManageTaskBloc>().add(
-                          ManageTaskEvent.deleteTask(data: item),
-                        ),
-                  ),
-                ],
-                child: CustomTile(
-                  title: item.title.getOrDefaultValue(''),
-                  description: item.description.getOrDefaultValue(''),
-                  status: item.status,
-                  onTap: () {
-                    context
-                        .read<ManageTaskBloc>()
-                        .add(ManageTaskEvent.setTaskData(data: item));
-                    context.router.push(EditTaskRoute(task: item));
-                  },
-                ),
-              );
-            },
+            itemBuilder: (context, index, item) => _TaskItem(item: item),
             items: state.taskList,
             noRecordFoundWidget: const NoRecordFound(
               title: 'There is no new recent items',

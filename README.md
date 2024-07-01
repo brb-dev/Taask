@@ -44,4 +44,6 @@ https://resocoder.com/2020/03/09/flutter-firebase-ddd-course-1-domain-driven-des
 ### Test Coverage
 1. [Read this](https://codewithandrea.com/articles/flutter-test-coverage/)
 2. ```brew install lcov```
-3. ```make run_test```
+3. ```fvm flutter test --coverage```
+4. ```genhtml coverage/lcov.info -o coverage/html```
+5. ```open coverage/html/index.html```

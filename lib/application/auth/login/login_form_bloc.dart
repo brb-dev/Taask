@@ -77,9 +77,6 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
               );
             },
             (login) async {
-              if (state.rememberPassword) {
-              } else {}
-
               emit(
                 state.copyWith(
                   isSubmitting: false,

@@ -1,7 +1,7 @@
 part of '../login_screen.dart';
 
 class _GoToRegister extends StatelessWidget {
-  const _GoToRegister({super.key});
+  const _GoToRegister();
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class _GoToRegister extends StatelessWidget {
           style: Theme.of(context).textTheme.titleSmall,
         ),
         TextButton(
-          key: const Key('createAccountButton'),
+          key: WidgetKeys.createAccountButton,
           style: Theme.of(context).textButtonTheme.style?.copyWith(
                 minimumSize: WidgetStateProperty.all(const Size(0, 0)),
                 padding: WidgetStateProperty.all(

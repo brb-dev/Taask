@@ -10,7 +10,7 @@ class _RegisterButton extends StatelessWidget {
           previous.isSubmitting != current.isSubmitting,
       builder: (context, state) {
         return ElevatedButton(
-          key: const Key('loginButtonKey'),
+          key: WidgetKeys.registerButtonKey,
           onPressed: state.isSubmitting
               ? null
               : () {

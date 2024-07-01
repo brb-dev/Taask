@@ -77,6 +77,55 @@ void main() {
         ],
       );
       blocTest<RegisterFormBloc, RegisterFormState>(
+        'registerWithEmailAndPasswordPressed with validation failure',
+        build: () => RegisterFormBloc(authRepository: authRepoMock),
+        setUp: () {
+          when(
+            () => authRepoMock.registerWithEmailAndPassword(
+              user: TaskUser.empty().copyWith().copyWith(
+                    displayName: 'Katrina',
+                    email: EmailAddress('kat@yopmail.com'),
+                    password: 'Test@1234',
+                    userName: '',
+                  ),
+            ),
+          ).thenAnswer(
+            (invocation) async => const Left(ApiFailure.other('fake-error')),
+          );
+        },
+        act: (bloc) async => bloc
+          ..add(const RegisterFormEvent.userNameChanged(''))
+          ..add(const RegisterFormEvent.emailChanged('kat@yopmail.com'))
+          ..add(const RegisterFormEvent.passwordChanged('Test@1234'))
+          ..add(const RegisterFormEvent.confirmPasswordChanged('Test@1234'))
+          ..add(const RegisterFormEvent.registerWithEmailAndPasswordPressed()),
+        expect: () => [
+          RegisterFormState.initial().copyWith(username: Username('')),
+          RegisterFormState.initial().copyWith(
+            username: Username(''),
+            email: EmailAddress('kat@yopmail.com'),
+          ),
+          RegisterFormState.initial().copyWith(
+            username: Username(''),
+            email: EmailAddress('kat@yopmail.com'),
+            password: Password.login('Test@1234'),
+          ),
+          RegisterFormState.initial().copyWith(
+            username: Username(''),
+            email: EmailAddress('kat@yopmail.com'),
+            password: Password.login('Test@1234'),
+            confirmPassword: Password.confirm('Test@1234', 'Test@1234'),
+          ),
+          RegisterFormState.initial().copyWith(
+            username: Username(''),
+            email: EmailAddress('kat@yopmail.com'),
+            password: Password.login('Test@1234'),
+            confirmPassword: Password.confirm('Test@1234', 'Test@1234'),
+            showErrorMessages: true,
+          ),
+        ],
+      );
+      blocTest<RegisterFormBloc, RegisterFormState>(
         'registerWithEmailAndPasswordPressed Failure',
         build: () => RegisterFormBloc(authRepository: authRepoMock),
         setUp: () {
@@ -132,6 +181,64 @@ void main() {
             showErrorMessages: true,
             authFailureOrSuccessOption:
                 optionOf(const Left(ApiFailure.other('fake-error'))),
+          ),
+        ],
+      );
+      blocTest<RegisterFormBloc, RegisterFormState>(
+        'registerWithEmailAndPasswordPressed Success',
+        build: () => RegisterFormBloc(authRepository: authRepoMock),
+        setUp: () {
+          when(
+            () => authRepoMock.registerWithEmailAndPassword(
+              user: TaskUser.empty().copyWith().copyWith(
+                    displayName: 'Katrina',
+                    email: EmailAddress('kat@yopmail.com'),
+                    password: 'Test@1234',
+                    userName: 'Katrina',
+                  ),
+            ),
+          ).thenAnswer(
+            (invocation) async => const Right(unit),
+          );
+        },
+        act: (bloc) async => bloc
+          ..add(const RegisterFormEvent.userNameChanged('Katrina'))
+          ..add(const RegisterFormEvent.emailChanged('kat@yopmail.com'))
+          ..add(const RegisterFormEvent.passwordChanged('Test@1234'))
+          ..add(const RegisterFormEvent.confirmPasswordChanged('Test@1234'))
+          ..add(const RegisterFormEvent.registerWithEmailAndPasswordPressed()),
+        expect: () => [
+          RegisterFormState.initial().copyWith(username: Username('Katrina')),
+          RegisterFormState.initial().copyWith(
+            username: Username('Katrina'),
+            email: EmailAddress('kat@yopmail.com'),
+          ),
+          RegisterFormState.initial().copyWith(
+            username: Username('Katrina'),
+            email: EmailAddress('kat@yopmail.com'),
+            password: Password.login('Test@1234'),
+          ),
+          RegisterFormState.initial().copyWith(
+            username: Username('Katrina'),
+            email: EmailAddress('kat@yopmail.com'),
+            password: Password.login('Test@1234'),
+            confirmPassword: Password.confirm('Test@1234', 'Test@1234'),
+          ),
+          RegisterFormState.initial().copyWith(
+            username: Username('Katrina'),
+            email: EmailAddress('kat@yopmail.com'),
+            password: Password.login('Test@1234'),
+            confirmPassword: Password.confirm('Test@1234', 'Test@1234'),
+            isSubmitting: true,
+          ),
+          RegisterFormState.initial().copyWith(
+            username: Username('Katrina'),
+            email: EmailAddress(''),
+            password: Password.login(''),
+            confirmPassword: Password.confirm('Test@1234', 'Test@1234'),
+            isSubmitting: false,
+            showErrorMessages: false,
+            authFailureOrSuccessOption: none(),
           ),
         ],
       );

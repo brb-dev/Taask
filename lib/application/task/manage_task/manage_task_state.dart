@@ -7,6 +7,7 @@ class ManageTaskState with _$ManageTaskState {
   const factory ManageTaskState({
     required TaskEntity task,
     required bool isSubmitting,
+    required bool isDeleting,
     required bool showErrorMessages,
     required bool isSuccess,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
@@ -15,6 +16,7 @@ class ManageTaskState with _$ManageTaskState {
   factory ManageTaskState.initial() => ManageTaskState(
         task: TaskEntity.empty(),
         isSubmitting: false,
+        isDeleting: false,
         isSuccess: false,
         showErrorMessages: false,
         failureOrSuccessOption: none(),

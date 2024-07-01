@@ -47,15 +47,13 @@ void main() {
           ).thenAnswer(
             (invocation) async => Right(Stream.fromIterable([MockUser()])),
           );
-          /* when(() => authRepoMock.isUserLoggedIn()).thenAnswer(
-            (invocation) async => Right(mockStream),
-          );*/
         },
         act: (bloc) async => bloc.add(const AuthEvent.init()),
         expect: () => [
           const AuthState.authenticated(),
         ],
       );
+
       blocTest<AuthBloc, AuthState>(
         'Init with Auth Check with null user',
         build: () => AuthBloc(authRepository: authRepoMock, config: configMock),
@@ -82,9 +80,7 @@ void main() {
           );
         },
         act: (bloc) async => bloc.add(const AuthEvent.logout()),
-        expect: () => [
-          //const AuthState.unauthenticated(),
-        ],
+        expect: () => [],
       );
       blocTest<AuthBloc, AuthState>(
         'Logout Success',
@@ -99,6 +95,22 @@ void main() {
         act: (bloc) async => bloc.add(const AuthEvent.logout()),
         expect: () => [
           const AuthState.unauthenticated(),
+        ],
+      );
+      blocTest<AuthBloc, AuthState>(
+        'Init with Auth Check Success for MOCK user',
+        build: () => AuthBloc(authRepository: authRepoMock, config: configMock),
+        setUp: () {
+          when(() => configMock.isMockFlavor).thenReturn(true);
+          when(
+            () => authRepoMock.isUserLoggedIn(),
+          ).thenAnswer(
+            (invocation) async => Right(Stream.fromIterable([MockUser()])),
+          );
+        },
+        act: (bloc) async => bloc.add(const AuthEvent.init()),
+        expect: () => [
+          const AuthState.authenticated(),
         ],
       );
     },

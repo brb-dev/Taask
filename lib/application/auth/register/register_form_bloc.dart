@@ -86,7 +86,6 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
                   showErrorMessages: false,
                   email: EmailAddress(''),
                   password: Password.login(''),
-                  authFailureOrSuccessOption: optionOf(failureOrSuccess),
                 ),
               );
             },

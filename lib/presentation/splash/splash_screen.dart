@@ -11,6 +11,7 @@ import '../../domain/task/entities/task_filter_entity.dart';
 import '../core/router/app_router.gr.dart';
 import '../core/theme/app_color.dart';
 import '../core/utils/app_assets.dart';
+import '../core/utils/widget_keys.dart';
 import '../core/widgets/custom_image_view.dart';
 
 @RoutePage()
@@ -113,7 +114,7 @@ class _SplashScreenState extends State<SplashScreen>
                 width: 50,
                 height: 50,
                 child: CircularProgressIndicator(
-                  key: Key('splashLoadingIndicator'),
+                  key: WidgetKeys.splashLoadingIndicator,
                 ),
               ),
             ],
