@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task/application/task/task_bloc.dart';
 
 import '../../application/auth/auth_bloc.dart';
+import '../../application/auth/login/login_form_bloc.dart';
 import '../../application/auth/user/user_bloc.dart';
 import '../../domain/core/value/value_objects.dart';
 import '../../domain/task/entities/task_filter_entity.dart';
@@ -73,6 +74,9 @@ class _SplashScreenState extends State<SplashScreen>
                 );
               },
               unauthenticated: (unauthState) {
+                context.read<LoginFormBloc>().add(
+                      const LoginFormEvent.loadLastSavedCred(),
+                    );
                 context.router.replaceAll(
                   [
                     const SplashRoute(),

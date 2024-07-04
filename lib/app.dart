@@ -13,8 +13,7 @@ import 'application/task/manage_task/manage_task_bloc.dart';
 import 'application/task/task_bloc.dart';
 import 'application/task/task_filter/task_filter_bloc.dart';
 import 'config.dart';
-import 'domain/core/value/value_objects.dart';
-import 'domain/task/entities/task_filter_entity.dart';
+import 'infrastructure/core/local_storage/cred_storage.dart';
 import 'infrastructure/core/local_storage/uid_storage.dart';
 import 'locator.dart';
 import 'presentation/core/router/app_router.dart';
@@ -34,6 +33,7 @@ void runAppWithCrashlyticsAndLocalization({required Flavor flavor}) {
       final config = locator<Config>();
       await Firebase.initializeApp(options: config.firebaseOptions);
       await locator<UidStorage>().init();
+      await locator<CredStorage>().init();
       runApp(
         App(
           flavor: flavor.name,

@@ -12,6 +12,7 @@ import 'domain/core/error/exception_handler.dart';
 import 'infrastructure/auth/datasources/auth_local.dart';
 import 'infrastructure/auth/datasources/auth_remote.dart';
 import 'infrastructure/auth/repositories/auth_repository.dart';
+import 'infrastructure/core/local_storage/cred_storage.dart';
 import 'infrastructure/core/local_storage/secure_storage.dart';
 import 'infrastructure/core/local_storage/uid_storage.dart';
 import 'infrastructure/task/datasources/task_local.dart';
@@ -31,6 +32,9 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => UidStorage(secureStorage: locator<SecureStorage>()),
   );
+  locator.registerLazySingleton(
+    () => CredStorage(secureStorage: locator<SecureStorage>()),
+  );
 
   locator.registerLazySingleton(() => DataSourceExceptionHandler());
   locator.registerLazySingleton(() => AuthLocalDataSource());
@@ -46,6 +50,7 @@ void setupLocator() {
       remoteDataSource: locator<AuthRemoteDataSource>(),
       localDataSource: locator<AuthLocalDataSource>(),
       uidStorage: locator<UidStorage>(),
+      credStorage: locator<CredStorage>(),
     ),
   );
   locator.registerLazySingleton(

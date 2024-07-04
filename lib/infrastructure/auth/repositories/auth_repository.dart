@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:task/infrastructure/auth/dtos/uid_dto.dart';
+import 'package:task/domain/auth/entities/cred.dart';
 
 import '../../../config.dart';
 import '../../../domain/auth/entities/task_user.dart';
@@ -10,21 +10,26 @@ import '../../../domain/auth/value/value_objects.dart';
 import '../../../domain/core/error/api_failure.dart';
 import '../../../domain/core/error/failure_handler.dart';
 import '../../../domain/core/value/value_objects.dart';
+import '../../core/local_storage/cred_storage.dart';
 import '../../core/local_storage/uid_storage.dart';
 import '../datasources/auth_local.dart';
 import '../datasources/auth_remote.dart';
+import '../dtos/cred_dto.dart';
+import '../dtos/uid_dto.dart';
 
 class AuthRepository implements IAuthRepository {
   final Config config;
   final AuthRemoteDataSource remoteDataSource;
   final AuthLocalDataSource localDataSource;
   final UidStorage uidStorage;
+  final CredStorage credStorage;
 
   AuthRepository({
     required this.config,
     required this.remoteDataSource,
     required this.localDataSource,
     required this.uidStorage,
+    required this.credStorage,
   });
 
   @override
@@ -147,6 +152,47 @@ class AuthRepository implements IAuthRepository {
       await uidStorage.set(UIDDto.fromDomain(uid));
 
       return const Right(unit);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, Unit>> storeCredential({
+    required EmailAddress email,
+    required Password password,
+  }) async {
+    try {
+      await credStorage.set(
+        CredDto(
+          email: email.getOrCrash(),
+          password: password.getOrCrash(),
+        ),
+      );
+
+      return const Right(unit);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, Unit>> deleteCredential() async {
+    try {
+      await credStorage.delete();
+
+      return const Right(unit);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, Cred>> loadCredential() async {
+    try {
+      final credDto = await credStorage.get();
+
+      return Right(credDto.toDomain());
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }

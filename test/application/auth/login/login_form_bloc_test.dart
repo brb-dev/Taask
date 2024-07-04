@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:task/application/auth/login/login_form_bloc.dart';
+import 'package:task/domain/auth/entities/cred.dart';
 import 'package:task/domain/auth/value/value_objects.dart';
 import 'package:task/domain/core/error/api_failure.dart';
 import 'package:task/infrastructure/auth/repositories/auth_repository.dart';
@@ -51,11 +52,51 @@ void main() {
         ],
       );
       blocTest<LoginFormBloc, LoginFormState>(
-        'loadLastSavedCred',
+        'loadLastSavedCred Failure',
         build: () => LoginFormBloc(authRepository: authRepoMock),
+        setUp: () {
+          when(
+            () => authRepoMock.loadCredential(),
+          ).thenAnswer(
+            (invocation) async => const Left(ApiFailure.other('fake-error')),
+          );
+        },
         act: (bloc) async => bloc.add(const LoginFormEvent.loadLastSavedCred()),
         expect: () => [
           LoginFormState.initial().copyWith(isSubmitting: true),
+          LoginFormState.initial().copyWith(isSubmitting: false),
+        ],
+      );
+      blocTest<LoginFormBloc, LoginFormState>(
+        'loadLastSavedCred Success',
+        build: () => LoginFormBloc(authRepository: authRepoMock),
+        setUp: () {
+          when(
+            () => authRepoMock.loadCredential(),
+          ).thenAnswer(
+            (invocation) async => Right(
+              Cred.empty().copyWith(
+                email: EmailAddress('abc@yopmail.com'),
+                password: Password.login('Test@1234'),
+              ),
+            ),
+          );
+        },
+        act: (bloc) async => bloc.add(const LoginFormEvent.loadLastSavedCred()),
+        expect: () => [
+          LoginFormState.initial().copyWith(isSubmitting: true),
+          LoginFormState.initial().copyWith(
+            isSubmitting: true,
+            rememberPassword: true,
+            email: EmailAddress('abc@yopmail.com'),
+            password: Password.login('Test@1234'),
+          ),
+          LoginFormState.initial().copyWith(
+            isSubmitting: false,
+            rememberPassword: true,
+            email: EmailAddress('abc@yopmail.com'),
+            password: Password.login('Test@1234'),
+          ),
         ],
       );
       blocTest<LoginFormBloc, LoginFormState>(
@@ -109,7 +150,7 @@ void main() {
       );
 
       blocTest<LoginFormBloc, LoginFormState>(
-        'loginWithEmailAndPasswordPressed with  Success',
+        'loginWithEmailAndPasswordPressed with  Success with remember password',
         build: () => LoginFormBloc(authRepository: authRepoMock),
         setUp: () {
           when(
@@ -117,6 +158,67 @@ void main() {
               email: EmailAddress('brb@yopmail.com'),
               password: Password.login('Test@1234'),
             ),
+          ).thenAnswer(
+            (invocation) async => const Right(unit),
+          );
+          when(
+            () => authRepoMock.storeCredential(
+              email: EmailAddress('brb@yopmail.com'),
+              password: Password.login('Test@1234'),
+            ),
+          ).thenAnswer(
+            (invocation) async => const Right(unit),
+          );
+        },
+        act: (bloc) async => bloc
+          ..add(const LoginFormEvent.emailChanged('brb@yopmail.com'))
+          ..add(const LoginFormEvent.passwordChanged('Test@1234'))
+          ..add(const LoginFormEvent.rememberCheckChanged())
+          ..add(const LoginFormEvent.loginWithEmailAndPasswordPressed()),
+        expect: () => [
+          LoginFormState.initial().copyWith(
+            email: EmailAddress('brb@yopmail.com'),
+          ),
+          LoginFormState.initial().copyWith(
+            email: EmailAddress('brb@yopmail.com'),
+            password: Password.login('Test@1234'),
+          ),
+          LoginFormState.initial().copyWith(
+            email: EmailAddress('brb@yopmail.com'),
+            password: Password.login('Test@1234'),
+            rememberPassword: true,
+          ),
+          LoginFormState.initial().copyWith(
+            email: EmailAddress('brb@yopmail.com'),
+            password: Password.login('Test@1234'),
+            isSubmitting: true,
+            rememberPassword: true,
+          ),
+          LoginFormState.initial().copyWith(
+            email: EmailAddress(''),
+            password: Password.login(''),
+            rememberPassword: true,
+            isSubmitting: false,
+            showErrorMessages: false,
+            authFailureOrSuccessOption: optionOf(const Right(unit)),
+          ),
+        ],
+      );
+
+      blocTest<LoginFormBloc, LoginFormState>(
+        'loginWithEmailAndPasswordPressed with  Success without remember password',
+        build: () => LoginFormBloc(authRepository: authRepoMock),
+        setUp: () {
+          when(
+            () => authRepoMock.loginWithEmailAndPassword(
+              email: EmailAddress('brb@yopmail.com'),
+              password: Password.login('Test@1234'),
+            ),
+          ).thenAnswer(
+            (invocation) async => const Right(unit),
+          );
+          when(
+            () => authRepoMock.deleteCredential(),
           ).thenAnswer(
             (invocation) async => const Right(unit),
           );

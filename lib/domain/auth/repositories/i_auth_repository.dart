@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../core/error/api_failure.dart';
 import '../../core/value/value_objects.dart';
+import '../entities/cred.dart';
 import '../entities/task_user.dart';
 import '../value/value_objects.dart';
 
@@ -27,4 +28,10 @@ abstract class IAuthRepository {
   Future<Either<ApiFailure, Unit>> storeUID({
     required UID uid,
   });
+  Future<Either<ApiFailure, Unit>> storeCredential({
+    required EmailAddress email,
+    required Password password,
+  });
+  Future<Either<ApiFailure, Unit>> deleteCredential();
+  Future<Either<ApiFailure, Cred>> loadCredential();
 }

@@ -26,6 +26,23 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
     await event.map(
       loadLastSavedCred: (e) async {
         emit(state.copyWith(isSubmitting: true));
+        final failureOrSuccess = await authRepository.loadCredential();
+        failureOrSuccess.fold(
+          (_) => emit(state.copyWith(isSubmitting: false)),
+          (cred) {
+            if (cred.email.isValid() && cred.password.isValid()) {
+              emit(
+                state.copyWith(
+                  email: cred.email,
+                  password: cred.password,
+                  rememberPassword: true,
+                  authFailureOrSuccessOption: none(),
+                ),
+              );
+            }
+            emit(state.copyWith(isSubmitting: false));
+          },
+        );
       },
       emailChanged: (e) {
         emit(
@@ -77,6 +94,14 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
               );
             },
             (login) async {
+              if (state.rememberPassword) {
+                await authRepository.storeCredential(
+                  email: state.email,
+                  password: state.password,
+                );
+              } else {
+                await authRepository.deleteCredential();
+              }
               emit(
                 state.copyWith(
                   isSubmitting: false,

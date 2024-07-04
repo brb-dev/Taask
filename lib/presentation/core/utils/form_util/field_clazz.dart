@@ -14,6 +14,7 @@ class FieldClazz<T> {
   final bool Function(T)? shouldObscureText;
   final TextInputType? textInputType;
   final List<TextInputFormatter>? inputFormatters;
+  final String? initialValue;
 
   FieldClazz({
     required this.buildWhen,
@@ -28,5 +29,6 @@ class FieldClazz<T> {
     this.textInputType,
     this.inputFormatters,
     this.shouldObscureText,
+    this.initialValue,
   });
 }
