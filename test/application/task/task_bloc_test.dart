@@ -103,14 +103,14 @@ void main() {
               <TaskEntity>[
                 TaskEntity.empty().copyWith(
                   id: '1',
-                  title: TaskTitle('Go To Gym'),
-                  description: TaskDescription('Need To go to Gym'),
+                  title: StringValue('Go To Gym'),
+                  description: StringValue('Need To go to Gym'),
                   status: TaskStatus('To Do'),
                 ),
                 TaskEntity.empty().copyWith(
                   id: '2',
-                  title: TaskTitle('Play Football'),
-                  description: TaskDescription('Need To play football'),
+                  title: StringValue('Play Football'),
+                  description: StringValue('Need To play football'),
                   status: TaskStatus('Done'),
                 ),
               ],
@@ -138,14 +138,14 @@ void main() {
             taskList: <TaskEntity>[
               TaskEntity.empty().copyWith(
                 id: '1',
-                title: TaskTitle('Go To Gym'),
-                description: TaskDescription('Need To go to Gym'),
+                title: StringValue('Go To Gym'),
+                description: StringValue('Need To go to Gym'),
                 status: TaskStatus('To Do'),
               ),
               TaskEntity.empty().copyWith(
                 id: '2',
-                title: TaskTitle('Play Football'),
-                description: TaskDescription('Need To play football'),
+                title: StringValue('Play Football'),
+                description: StringValue('Need To play football'),
                 status: TaskStatus('Done'),
               ),
             ],
@@ -167,14 +167,14 @@ void main() {
             taskList: <TaskEntity>[
               TaskEntity.empty().copyWith(
                 id: '1',
-                title: TaskTitle('Task 1'),
-                description: TaskDescription('Task 1 description'),
+                title: StringValue('Task 1'),
+                description: StringValue('Task 1 description'),
                 status: TaskStatus('To Do'),
               ),
               TaskEntity.empty().copyWith(
                 id: '2',
-                title: TaskTitle('Task 2'),
-                description: TaskDescription('Task 2 description'),
+                title: StringValue('Task 2'),
+                description: StringValue('Task 2 description'),
                 status: TaskStatus('Done'),
               ),
             ],
@@ -207,14 +207,14 @@ void main() {
             taskList: <TaskEntity>[
               TaskEntity.empty().copyWith(
                 id: '1',
-                title: TaskTitle('Task 1'),
-                description: TaskDescription('Task 1 description'),
+                title: StringValue('Task 1'),
+                description: StringValue('Task 1 description'),
                 status: TaskStatus('To Do'),
               ),
               TaskEntity.empty().copyWith(
                 id: '2',
-                title: TaskTitle('Task 2'),
-                description: TaskDescription('Task 2 description'),
+                title: StringValue('Task 2'),
+                description: StringValue('Task 2 description'),
                 status: TaskStatus('Done'),
               ),
             ],
@@ -226,14 +226,14 @@ void main() {
             taskList: <TaskEntity>[
               TaskEntity.empty().copyWith(
                 id: '1',
-                title: TaskTitle('Task 1'),
-                description: TaskDescription('Task 1 description'),
+                title: StringValue('Task 1'),
+                description: StringValue('Task 1 description'),
                 status: TaskStatus('To Do'),
               ),
               TaskEntity.empty().copyWith(
                 id: '2',
-                title: TaskTitle('Task 2'),
-                description: TaskDescription('Task 2 description'),
+                title: StringValue('Task 2'),
+                description: StringValue('Task 2 description'),
                 status: TaskStatus('Done'),
               ),
             ],
@@ -255,14 +255,14 @@ void main() {
           taskList: <TaskEntity>[
             TaskEntity.empty().copyWith(
               id: '1',
-              title: TaskTitle('Task 1'),
-              description: TaskDescription('Task 1 description'),
+              title: StringValue('Task 1'),
+              description: StringValue('Task 1 description'),
               status: TaskStatus('To Do'),
             ),
             TaskEntity.empty().copyWith(
               id: '2',
-              title: TaskTitle('Task 2'),
-              description: TaskDescription('Task 2 description'),
+              title: StringValue('Task 2'),
+              description: StringValue('Task 2 description'),
               status: TaskStatus('Done'),
             ),
           ],
@@ -284,14 +284,14 @@ void main() {
               <TaskEntity>[
                 TaskEntity.empty().copyWith(
                   id: '3',
-                  title: TaskTitle('Task 3'),
-                  description: TaskDescription('Task 3 description'),
+                  title: StringValue('Task 3'),
+                  description: StringValue('Task 3 description'),
                   status: TaskStatus('To Do'),
                 ),
                 TaskEntity.empty().copyWith(
                   id: '4',
-                  title: TaskTitle('Task 4'),
-                  description: TaskDescription('Task 4 description'),
+                  title: StringValue('Task 4'),
+                  description: StringValue('Task 4 description'),
                   status: TaskStatus('Done'),
                 ),
               ],
@@ -308,14 +308,14 @@ void main() {
             taskList: <TaskEntity>[
               TaskEntity.empty().copyWith(
                 id: '1',
-                title: TaskTitle('Task 1'),
-                description: TaskDescription('Task 1 description'),
+                title: StringValue('Task 1'),
+                description: StringValue('Task 1 description'),
                 status: TaskStatus('To Do'),
               ),
               TaskEntity.empty().copyWith(
                 id: '2',
-                title: TaskTitle('Task 2'),
-                description: TaskDescription('Task 2 description'),
+                title: StringValue('Task 2'),
+                description: StringValue('Task 2 description'),
                 status: TaskStatus('Done'),
               ),
             ],
@@ -327,26 +327,26 @@ void main() {
             taskList: <TaskEntity>[
               TaskEntity.empty().copyWith(
                 id: '1',
-                title: TaskTitle('Task 1'),
-                description: TaskDescription('Task 1 description'),
+                title: StringValue('Task 1'),
+                description: StringValue('Task 1 description'),
                 status: TaskStatus('To Do'),
               ),
               TaskEntity.empty().copyWith(
                 id: '2',
-                title: TaskTitle('Task 2'),
-                description: TaskDescription('Task 2 description'),
+                title: StringValue('Task 2'),
+                description: StringValue('Task 2 description'),
                 status: TaskStatus('Done'),
               ),
               TaskEntity.empty().copyWith(
                 id: '3',
-                title: TaskTitle('Task 3'),
-                description: TaskDescription('Task 3 description'),
+                title: StringValue('Task 3'),
+                description: StringValue('Task 3 description'),
                 status: TaskStatus('To Do'),
               ),
               TaskEntity.empty().copyWith(
                 id: '4',
-                title: TaskTitle('Task 4'),
-                description: TaskDescription('Task 4 description'),
+                title: StringValue('Task 4'),
+                description: StringValue('Task 4 description'),
                 status: TaskStatus('Done'),
               ),
             ],
