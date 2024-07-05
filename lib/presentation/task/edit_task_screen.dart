@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:task/domain/core/value/value_objects.dart';
 
 import '../../application/auth/user/user_bloc.dart';
 import '../../application/task/manage_task/manage_task_bloc.dart';
@@ -85,7 +86,7 @@ class EditTaskScreen extends StatelessWidget {
                   GenericDropdown(
                     key: WidgetKeys.taskStatusKey,
                     labelText: '',
-                    validator: (text) => TaskTitle(text ?? '').value.fold(
+                    validator: (text) => StringValue(text ?? '').value.fold(
                           (f) => f.maybeMap(
                             empty: (_) => 'Task status cannot be empty.',
                             orElse: () => null,
@@ -114,7 +115,7 @@ class EditTaskScreen extends StatelessWidget {
                   GenericTextField(
                     fieldKey: 'taskTitleKey',
                     labelText: 'Task Title',
-                    validator: (text) => TaskTitle(text ?? '').value.fold(
+                    validator: (text) => StringValue(text ?? '').value.fold(
                           (f) => f.maybeMap(
                             empty: (_) => 'Task title cannot be empty.',
                             orElse: () => null,
@@ -139,7 +140,7 @@ class EditTaskScreen extends StatelessWidget {
                   GenericTextField(
                     fieldKey: 'taskDescriptionKey',
                     labelText: 'Task Description',
-                    validator: (text) => TaskDescription(text ?? '').value.fold(
+                    validator: (text) => StringValue(text ?? '').value.fold(
                           (f) => f.maybeMap(
                             empty: (_) => 'Task description cannot be empty.',
                             orElse: () => null,

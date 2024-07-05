@@ -17,10 +17,11 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$TaskEntity {
   String get id => throw _privateConstructorUsedError;
-  String get uid => throw _privateConstructorUsedError;
-  TaskTitle get title => throw _privateConstructorUsedError;
-  TaskDescription get description => throw _privateConstructorUsedError;
+  UID get uid => throw _privateConstructorUsedError;
+  StringValue get title => throw _privateConstructorUsedError;
+  StringValue get description => throw _privateConstructorUsedError;
   TaskStatus get status => throw _privateConstructorUsedError;
+  bool get isDeleteInProgress => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TaskEntityCopyWith<TaskEntity> get copyWith =>
@@ -35,10 +36,11 @@ abstract class $TaskEntityCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      String uid,
-      TaskTitle title,
-      TaskDescription description,
-      TaskStatus status});
+      UID uid,
+      StringValue title,
+      StringValue description,
+      TaskStatus status,
+      bool isDeleteInProgress});
 }
 
 /// @nodoc
@@ -59,6 +61,7 @@ class _$TaskEntityCopyWithImpl<$Res, $Val extends TaskEntity>
     Object? title = null,
     Object? description = null,
     Object? status = null,
+    Object? isDeleteInProgress = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -68,19 +71,23 @@ class _$TaskEntityCopyWithImpl<$Res, $Val extends TaskEntity>
       uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
-              as String,
+              as UID,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as TaskTitle,
+              as StringValue,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as TaskDescription,
+              as StringValue,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as TaskStatus,
+      isDeleteInProgress: null == isDeleteInProgress
+          ? _value.isDeleteInProgress
+          : isDeleteInProgress // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -95,10 +102,11 @@ abstract class _$$TaskEntityImplCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      String uid,
-      TaskTitle title,
-      TaskDescription description,
-      TaskStatus status});
+      UID uid,
+      StringValue title,
+      StringValue description,
+      TaskStatus status,
+      bool isDeleteInProgress});
 }
 
 /// @nodoc
@@ -117,6 +125,7 @@ class __$$TaskEntityImplCopyWithImpl<$Res>
     Object? title = null,
     Object? description = null,
     Object? status = null,
+    Object? isDeleteInProgress = null,
   }) {
     return _then(_$TaskEntityImpl(
       id: null == id
@@ -126,19 +135,23 @@ class __$$TaskEntityImplCopyWithImpl<$Res>
       uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
-              as String,
+              as UID,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as TaskTitle,
+              as StringValue,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as TaskDescription,
+              as StringValue,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as TaskStatus,
+      isDeleteInProgress: null == isDeleteInProgress
+          ? _value.isDeleteInProgress
+          : isDeleteInProgress // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -151,23 +164,26 @@ class _$TaskEntityImpl extends _TaskEntity {
       required this.uid,
       required this.title,
       required this.description,
-      required this.status})
+      required this.status,
+      required this.isDeleteInProgress})
       : super._();
 
   @override
   final String id;
   @override
-  final String uid;
+  final UID uid;
   @override
-  final TaskTitle title;
+  final StringValue title;
   @override
-  final TaskDescription description;
+  final StringValue description;
   @override
   final TaskStatus status;
+  @override
+  final bool isDeleteInProgress;
 
   @override
   String toString() {
-    return 'TaskEntity(id: $id, uid: $uid, title: $title, description: $description, status: $status)';
+    return 'TaskEntity(id: $id, uid: $uid, title: $title, description: $description, status: $status, isDeleteInProgress: $isDeleteInProgress)';
   }
 
   @override
@@ -180,12 +196,14 @@ class _$TaskEntityImpl extends _TaskEntity {
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
                 other.description == description) &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.isDeleteInProgress, isDeleteInProgress) ||
+                other.isDeleteInProgress == isDeleteInProgress));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, uid, title, description, status);
+  int get hashCode => Object.hash(
+      runtimeType, id, uid, title, description, status, isDeleteInProgress);
 
   @JsonKey(ignore: true)
   @override
@@ -197,22 +215,25 @@ class _$TaskEntityImpl extends _TaskEntity {
 abstract class _TaskEntity extends TaskEntity {
   const factory _TaskEntity(
       {required final String id,
-      required final String uid,
-      required final TaskTitle title,
-      required final TaskDescription description,
-      required final TaskStatus status}) = _$TaskEntityImpl;
+      required final UID uid,
+      required final StringValue title,
+      required final StringValue description,
+      required final TaskStatus status,
+      required final bool isDeleteInProgress}) = _$TaskEntityImpl;
   const _TaskEntity._() : super._();
 
   @override
   String get id;
   @override
-  String get uid;
+  UID get uid;
   @override
-  TaskTitle get title;
+  StringValue get title;
   @override
-  TaskDescription get description;
+  StringValue get description;
   @override
   TaskStatus get status;
+  @override
+  bool get isDeleteInProgress;
   @override
   @JsonKey(ignore: true)
   _$$TaskEntityImplCopyWith<_$TaskEntityImpl> get copyWith =>

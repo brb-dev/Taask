@@ -35,3 +35,11 @@ bool isAtLeastOneSpecialCharacter({
   required String input,
 }) =>
     RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(input);
+
+String dashIfEmpty(String text) {
+  return text.isEmpty ? '-' : text;
+}
+
+String naIfEmpty(String text) {
+  return text.isEmpty ? 'NA' : text;
+}

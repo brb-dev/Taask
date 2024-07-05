@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:task/domain/core/value/value_objects.dart';
 
 import '../../../domain/task/entities/task_entity.dart';
 import '../../../domain/task/value/value_objects.dart';
@@ -21,10 +22,11 @@ class TaskDto with _$TaskDto {
   TaskEntity toDomain() {
     return TaskEntity(
       id: id,
-      uid: uid,
-      title: TaskTitle(title),
-      description: TaskDescription(description),
+      uid: UID(uid),
+      title: StringValue(title),
+      description: StringValue(description),
       status: TaskStatus(status),
+      isDeleteInProgress: false,
     );
   }
 
@@ -33,7 +35,7 @@ class TaskDto with _$TaskDto {
   ) {
     return TaskDto(
       id: task.id,
-      uid: task.uid,
+      uid: task.uid.getOrCrash(),
       title: task.title.getOrDefaultValue(''),
       description: task.description.getOrDefaultValue(''),
       status: task.status.getOrCrash(),

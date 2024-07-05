@@ -5,6 +5,7 @@ import 'package:task/domain/task/repositories/i_task_repository.dart';
 import 'package:task/domain/task/value/value_objects.dart';
 
 import '../../../domain/core/error/api_failure.dart';
+import '../../../domain/core/value/value_objects.dart';
 import '../../../domain/task/entities/task_entity.dart';
 
 part 'manage_task_event.dart';
@@ -81,7 +82,10 @@ class ManageTaskBloc extends Bloc<ManageTaskEvent, ManageTaskState> {
       deleteTask: (e) async {
         emit(
           state.copyWith(
-            isDeleting: true,
+            isSubmitting: true,
+            task: e.data.copyWith(
+              isDeleteInProgress: true,
+            ),
             failureOrSuccessOption: none(),
           ),
         );
@@ -91,7 +95,7 @@ class ManageTaskBloc extends Bloc<ManageTaskEvent, ManageTaskState> {
           (failure) {
             emit(
               state.copyWith(
-                isDeleting: false,
+                isSubmitting: false,
                 failureOrSuccessOption: optionOf(failureOrSuccess),
               ),
             );
@@ -99,7 +103,7 @@ class ManageTaskBloc extends Bloc<ManageTaskEvent, ManageTaskState> {
           (success) {
             emit(
               state.copyWith(
-                isDeleting: false,
+                isSubmitting: false,
               ),
             );
           },
@@ -131,7 +135,7 @@ class ManageTaskBloc extends Bloc<ManageTaskEvent, ManageTaskState> {
         _emitAfterOnTextChange(
           emit: emit,
           taskData: state.task.copyWith(
-            title: TaskTitle(newValue),
+            title: StringValue(newValue),
           ),
         );
         break;
@@ -139,7 +143,7 @@ class ManageTaskBloc extends Bloc<ManageTaskEvent, ManageTaskState> {
         _emitAfterOnTextChange(
           emit: emit,
           taskData: state.task.copyWith(
-            description: TaskDescription(newValue),
+            description: StringValue(newValue),
           ),
         );
         break;

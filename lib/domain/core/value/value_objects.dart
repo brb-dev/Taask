@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import '../error/errors.dart';
 import '../error/failures.dart';
+import 'value_transformers.dart';
 import 'value_validators.dart';
 
 @immutable
@@ -88,4 +89,18 @@ class UID extends ValueObject<String> {
   }
 
   const UID._(this.value);
+}
+
+class StringValue extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory StringValue(String input) =>
+      StringValue._(validateStringNotEmpty(input));
+
+  String get displayDashIfEmpty => dashIfEmpty((value.getOrElse(() => '')));
+
+  String get displayNAIfEmpty => naIfEmpty(value.getOrElse(() => ''));
+
+  const StringValue._(this.value);
 }

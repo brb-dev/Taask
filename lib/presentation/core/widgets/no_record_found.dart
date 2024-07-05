@@ -31,6 +31,7 @@ class NoRecordFound extends StatelessWidget {
             child: CustomImageView(
               imagePath: svgImage,
               height: 100,
+              color: AppColor.grey,
             ),
           ),
           if (title.isNotEmpty)
@@ -46,9 +47,7 @@ class NoRecordFound extends StatelessWidget {
             child: Text(
               subTitle,
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: AppColor.black,
-                  ),
+              style: Theme.of(context).textTheme.labelSmall,
             ),
           ),
           actionButton,

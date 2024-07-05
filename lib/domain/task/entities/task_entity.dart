@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:task/domain/core/value/value_objects.dart';
 
 import '../value/value_objects.dart';
 
@@ -10,22 +11,24 @@ class TaskEntity with _$TaskEntity {
 
   const factory TaskEntity({
     required String id,
-    required String uid,
-    required TaskTitle title,
-    required TaskDescription description,
+    required UID uid,
+    required StringValue title,
+    required StringValue description,
     required TaskStatus status,
+    required bool isDeleteInProgress,
   }) = _TaskEntity;
 
   factory TaskEntity.empty() => TaskEntity(
         id: '',
-        uid: '',
-        title: TaskTitle(''),
-        description: TaskDescription(''),
+        uid: UID(''),
+        title: StringValue(''),
+        description: StringValue(''),
         status: TaskStatus(''),
+        isDeleteInProgress: false,
       );
 
   bool get isValid =>
-      uid.isNotEmpty &&
+      uid.getOrDefaultValue('').isNotEmpty &&
       title.isValid() &&
       description.isValid() &&
       status.isValid();

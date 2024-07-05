@@ -821,8 +821,8 @@ abstract class _OnValueChange implements ManageTaskEvent {
 /// @nodoc
 mixin _$ManageTaskState {
   TaskEntity get task => throw _privateConstructorUsedError;
+  List<TaskEntity> get taskList => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
-  bool get isDeleting => throw _privateConstructorUsedError;
   bool get showErrorMessages => throw _privateConstructorUsedError;
   bool get isSuccess => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
@@ -841,8 +841,8 @@ abstract class $ManageTaskStateCopyWith<$Res> {
   @useResult
   $Res call(
       {TaskEntity task,
+      List<TaskEntity> taskList,
       bool isSubmitting,
-      bool isDeleting,
       bool showErrorMessages,
       bool isSuccess,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
@@ -864,8 +864,8 @@ class _$ManageTaskStateCopyWithImpl<$Res, $Val extends ManageTaskState>
   @override
   $Res call({
     Object? task = null,
+    Object? taskList = null,
     Object? isSubmitting = null,
-    Object? isDeleting = null,
     Object? showErrorMessages = null,
     Object? isSuccess = null,
     Object? failureOrSuccessOption = null,
@@ -875,13 +875,13 @@ class _$ManageTaskStateCopyWithImpl<$Res, $Val extends ManageTaskState>
           ? _value.task
           : task // ignore: cast_nullable_to_non_nullable
               as TaskEntity,
+      taskList: null == taskList
+          ? _value.taskList
+          : taskList // ignore: cast_nullable_to_non_nullable
+              as List<TaskEntity>,
       isSubmitting: null == isSubmitting
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isDeleting: null == isDeleting
-          ? _value.isDeleting
-          : isDeleting // ignore: cast_nullable_to_non_nullable
               as bool,
       showErrorMessages: null == showErrorMessages
           ? _value.showErrorMessages
@@ -917,8 +917,8 @@ abstract class _$$ManageTaskStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {TaskEntity task,
+      List<TaskEntity> taskList,
       bool isSubmitting,
-      bool isDeleting,
       bool showErrorMessages,
       bool isSuccess,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
@@ -939,8 +939,8 @@ class __$$ManageTaskStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? task = null,
+    Object? taskList = null,
     Object? isSubmitting = null,
-    Object? isDeleting = null,
     Object? showErrorMessages = null,
     Object? isSuccess = null,
     Object? failureOrSuccessOption = null,
@@ -950,13 +950,13 @@ class __$$ManageTaskStateImplCopyWithImpl<$Res>
           ? _value.task
           : task // ignore: cast_nullable_to_non_nullable
               as TaskEntity,
+      taskList: null == taskList
+          ? _value._taskList
+          : taskList // ignore: cast_nullable_to_non_nullable
+              as List<TaskEntity>,
       isSubmitting: null == isSubmitting
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isDeleting: null == isDeleting
-          ? _value.isDeleting
-          : isDeleting // ignore: cast_nullable_to_non_nullable
               as bool,
       showErrorMessages: null == showErrorMessages
           ? _value.showErrorMessages
@@ -979,19 +979,26 @@ class __$$ManageTaskStateImplCopyWithImpl<$Res>
 class _$ManageTaskStateImpl extends _ManageTaskState {
   const _$ManageTaskStateImpl(
       {required this.task,
+      required final List<TaskEntity> taskList,
       required this.isSubmitting,
-      required this.isDeleting,
       required this.showErrorMessages,
       required this.isSuccess,
       required this.failureOrSuccessOption})
-      : super._();
+      : _taskList = taskList,
+        super._();
 
   @override
   final TaskEntity task;
+  final List<TaskEntity> _taskList;
+  @override
+  List<TaskEntity> get taskList {
+    if (_taskList is EqualUnmodifiableListView) return _taskList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_taskList);
+  }
+
   @override
   final bool isSubmitting;
-  @override
-  final bool isDeleting;
   @override
   final bool showErrorMessages;
   @override
@@ -1001,7 +1008,7 @@ class _$ManageTaskStateImpl extends _ManageTaskState {
 
   @override
   String toString() {
-    return 'ManageTaskState(task: $task, isSubmitting: $isSubmitting, isDeleting: $isDeleting, showErrorMessages: $showErrorMessages, isSuccess: $isSuccess, failureOrSuccessOption: $failureOrSuccessOption)';
+    return 'ManageTaskState(task: $task, taskList: $taskList, isSubmitting: $isSubmitting, showErrorMessages: $showErrorMessages, isSuccess: $isSuccess, failureOrSuccessOption: $failureOrSuccessOption)';
   }
 
   @override
@@ -1010,10 +1017,9 @@ class _$ManageTaskStateImpl extends _ManageTaskState {
         (other.runtimeType == runtimeType &&
             other is _$ManageTaskStateImpl &&
             (identical(other.task, task) || other.task == task) &&
+            const DeepCollectionEquality().equals(other._taskList, _taskList) &&
             (identical(other.isSubmitting, isSubmitting) ||
                 other.isSubmitting == isSubmitting) &&
-            (identical(other.isDeleting, isDeleting) ||
-                other.isDeleting == isDeleting) &&
             (identical(other.showErrorMessages, showErrorMessages) ||
                 other.showErrorMessages == showErrorMessages) &&
             (identical(other.isSuccess, isSuccess) ||
@@ -1023,8 +1029,14 @@ class _$ManageTaskStateImpl extends _ManageTaskState {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, task, isSubmitting, isDeleting,
-      showErrorMessages, isSuccess, failureOrSuccessOption);
+  int get hashCode => Object.hash(
+      runtimeType,
+      task,
+      const DeepCollectionEquality().hash(_taskList),
+      isSubmitting,
+      showErrorMessages,
+      isSuccess,
+      failureOrSuccessOption);
 
   @JsonKey(ignore: true)
   @override
@@ -1037,8 +1049,8 @@ class _$ManageTaskStateImpl extends _ManageTaskState {
 abstract class _ManageTaskState extends ManageTaskState {
   const factory _ManageTaskState(
       {required final TaskEntity task,
+      required final List<TaskEntity> taskList,
       required final bool isSubmitting,
-      required final bool isDeleting,
       required final bool showErrorMessages,
       required final bool isSuccess,
       required final Option<Either<ApiFailure, dynamic>>
@@ -1048,9 +1060,9 @@ abstract class _ManageTaskState extends ManageTaskState {
   @override
   TaskEntity get task;
   @override
-  bool get isSubmitting;
+  List<TaskEntity> get taskList;
   @override
-  bool get isDeleting;
+  bool get isSubmitting;
   @override
   bool get showErrorMessages;
   @override

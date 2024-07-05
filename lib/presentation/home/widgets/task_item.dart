@@ -9,11 +9,12 @@ class _TaskItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<ManageTaskBloc, ManageTaskState>(
         listenWhen: (previous, current) =>
-            previous.isDeleting != current.isDeleting && !current.isDeleting,
+            previous.isSubmitting != current.isSubmitting &&
+            !current.isSubmitting,
         listener: (context, state) {
           state.failureOrSuccessOption.fold(
             () {
-              if (!state.isDeleting) {
+              if (!state.isSubmitting) {
                 final user = context.read<UserBloc>().state.user;
                 final taskState = context.read<TaskBloc>().state;
 
@@ -35,10 +36,10 @@ class _TaskItem extends StatelessWidget {
           );
         },
         buildWhen: (previous, current) =>
-            previous.isDeleting != current.isDeleting,
+            previous.isSubmitting != current.isSubmitting,
         builder: (context, state) {
           return LoadingShimmer.withChild(
-            enabled: state.isDeleting,
+            enabled: state.task == item && state.task.isDeleteInProgress,
             child: CustomSlidable(
               endActionPaneActions: [
                 CustomSlidableAction(

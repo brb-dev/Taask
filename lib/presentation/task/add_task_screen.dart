@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:task/domain/core/value/value_objects.dart';
 
 import '../../application/auth/user/user_bloc.dart';
 import '../../application/task/manage_task/manage_task_bloc.dart';
@@ -186,7 +187,8 @@ class _AddTaskButton extends StatelessWidget {
                       .read<ManageTaskBloc>()
                       .state
                       .task
-                      .copyWith(uid: context.read<UserBloc>().state.user.uid);
+                      .copyWith(
+                          uid: UID(context.read<UserBloc>().state.user.uid));
                   context.read<ManageTaskBloc>()
                     ..add(ManageTaskEvent.setTaskData(data: task))
                     ..add(const ManageTaskEvent.addOrEditTask());

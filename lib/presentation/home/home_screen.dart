@@ -96,8 +96,9 @@ class _HomeScreenState extends State<HomeScreen> {
             itemBuilder: (context, index, item) => _TaskItem(item: item),
             items: state.taskList,
             noRecordFoundWidget: const NoRecordFound(
-              title: 'There is no new recent items',
-              subTitle: '',
+              title: 'There is no new task items',
+              subTitle:
+                  'Try adjusting your search or filter selection to find what you’re looking for.',
             ),
             onLoadingMore: () => context
                 .read<TaskBloc>()
